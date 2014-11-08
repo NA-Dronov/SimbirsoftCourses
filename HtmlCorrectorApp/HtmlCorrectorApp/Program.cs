@@ -13,7 +13,6 @@ namespace HtmlCorrectorApp
         {
           HtmlCorrector hc = new HtmlCorrector();
           hc.menu();
-          //RegExample();
         }
     }
 }

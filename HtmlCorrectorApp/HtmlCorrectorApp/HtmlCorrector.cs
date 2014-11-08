@@ -10,13 +10,24 @@ namespace HtmlCorrectorApp
 {
     class HtmlCorrector
     {
-        public string InputFileName { get; set; } //Расположение html файла
-        public string DictLocation { get; set; } //Расположение словаря
-        public string OutputFileName { get; set; } //Расположение результирующего файла
-
-        private List<string> dictionary = new List<string>(); //Список для хранения словаря
-
-        private bool isOutLoaded; //Флаги состояния
+        /// <summary>
+        /// Расположение html файла
+        /// </summary>
+        public string InputFileName { get; set; }
+        /// <summary>
+        /// Расположение словаря
+        /// </summary>
+        public string DictLocation { get; set; }
+        /// <summary>
+        /// Расположение результирующего файла
+        /// </summary>
+        public string OutputFileName { get; set; }
+        /// <summary>
+        /// Список для хранения словаря
+        /// </summary>
+        private List<string> dictionary = new List<string>();
+        //Флаги состояния
+        private bool isOutLoaded; 
         private bool isInLoaded;
         private bool isDictLoaded;
 
@@ -34,7 +45,10 @@ namespace HtmlCorrectorApp
                 Console.WriteLine(word);
             }
         }
-        public void LoadDictionary() //Метод для загрузки словаря
+        /// <summary>
+        /// Метод для загрузки словаря
+        /// </summary>
+        public void LoadDictionary()
         {
             // Открыть файл словаря
             using (StreamReader reader = File.OpenText(DictLocation))
@@ -44,7 +58,10 @@ namespace HtmlCorrectorApp
                 { dictionary.Add(input); }
             }           
         }
-        public void CorrectHtml() //Откорректировать html
+        /// <summary>
+        /// Метод для корректировки содержимого html файла
+        /// </summary>
+        public void CorrectHtml() 
         {
             //Открыть файл для чтения
             using (StreamReader reader = File.OpenText(InputFileName))
@@ -78,6 +95,9 @@ namespace HtmlCorrectorApp
             return string.Format("+++++ HtmlCorrectorInfo +++++\nInput file: {0}\nOutput file: {1}\nDictionary:\n 1.File Name: {2}\n 2.Size: {3}",
                 InputFileName, OutputFileName, DictLocation, dictionary.Count);
         }
+        /// <summary>
+        /// Вывод меню в консоль
+        /// </summary>
         private void ShowMenu() 
         {
             Console.WriteLine("Код команды: Назначение.");
@@ -108,7 +128,11 @@ namespace HtmlCorrectorApp
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("exit: Выход.");
         }
-        private bool EnterInFile() //Ввод названия входного файла и проверка на его существование
+        /// <summary>
+        /// Ввод названия входного файла и проверка на его существование
+        /// </summary>
+        /// <returns></returns>
+        private bool EnterInFile() 
         {
             Console.Write("Enter input file name: ");
             InputFileName = Console.ReadLine();
@@ -129,7 +153,11 @@ namespace HtmlCorrectorApp
             }
             return true;
         }
-        private bool EnterOutFile() //Ввод названия выходного файла
+        /// <summary>
+        /// Ввод названия выходного файла
+        /// </summary>
+        /// <returns></returns>
+        private bool EnterOutFile()
         {
             Console.Write("Enter output file name: ");
             OutputFileName = Console.ReadLine();
@@ -141,7 +169,11 @@ namespace HtmlCorrectorApp
             }
             return true;
         }
-        private bool EnterDict() //Ввод названия файла словаря проверка на его существование и загрузка в память
+        /// <summary>
+        /// Ввод названия файла словаря проверка на его существование и загрузка в память
+        /// </summary>
+        /// <returns></returns>
+        private bool EnterDict() 
         {
             bool status = false;
             Console.Write("Enter dictionary file name: ");
@@ -161,7 +193,9 @@ namespace HtmlCorrectorApp
             }
             return status;
         }
-
+        /// <summary>
+        /// Метод реализующий работу меню
+        /// </summary>
         public void menu()
         {
             string menuCode = null;
