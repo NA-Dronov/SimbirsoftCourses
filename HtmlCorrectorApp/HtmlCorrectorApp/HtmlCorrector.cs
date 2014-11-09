@@ -26,16 +26,22 @@ namespace HtmlCorrectorApp
         /// Список для хранения словаря
         /// </summary>
         private List<string> dictionary = new List<string>();
-        //Флаги состояния
-        private bool isOutLoaded; 
-        private bool isInLoaded;
-        private bool isDictLoaded;
-
+        /// <summary>
+        /// Флаги состояния отвечающие за состояние входных (словарь, обрабатываемый файл)
+        /// и выходных файлов. Если файл подключен, выставляется соответсвующий флаг.
+        /// </summary>
+        [Flags]
+        public enum IOStatus
+        {
+            None = 0x0,
+            OutLoaded = 0x1,
+            InLoaded = 0x2,
+            DictLoaded = 0x4
+        }
+        private IOStatus status;
         public HtmlCorrector()
         {
-            isOutLoaded = false;
-            isInLoaded = false;
-            isDictLoaded = false;
+            status = IOStatus.None;
         }
 
         private void ShowDictionary()
@@ -56,12 +62,12 @@ namespace HtmlCorrectorApp
                 string input = null;
                 while (((input = reader.ReadLine()) != null) && (dictionary.Count < 100000))
                 { dictionary.Add(input); }
-            }           
+            }
         }
         /// <summary>
         /// Метод для корректировки содержимого html файла
         /// </summary>
-        public void CorrectHtml() 
+        private void CorrectHtml()
         {
             //Открыть файл для чтения
             using (StreamReader reader = File.OpenText(InputFileName))
@@ -92,48 +98,54 @@ namespace HtmlCorrectorApp
         }
         public override string ToString()
         {
-            return string.Format("+++++ HtmlCorrectorInfo +++++\nInput file: {0}\nOutput file: {1}\nDictionary:\n 1.File Name: {2}\n 2.Size: {3}",
+            Console.Clear();
+            return string.Format("Input  file: {0}\n" + 
+                "Output file: {1}\n"  + 
+                "Dictionary :\n"      + 
+                " 1.File Name - {2}\n" + 
+                " 2.Size      - {3}",
                 InputFileName, OutputFileName, DictLocation, dictionary.Count);
         }
         /// <summary>
         /// Вывод меню в консоль
         /// </summary>
-        private void ShowMenu() 
+        private void ShowMenu()
         {
             Console.WriteLine("Код команды: Назначение.");
-            if (isInLoaded) 
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-            } 
-            Console.WriteLine("input: Ввод названия входного файла.");
-            Console.ForegroundColor = ConsoleColor.Gray;
-            if (isOutLoaded)
+            if (status.HasFlag(IOStatus.InLoaded))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            Console.WriteLine("output: Ввод названия выходного файла.");
+            Console.WriteLine("input      : Ввод названия входного файла.");
             Console.ForegroundColor = ConsoleColor.Gray;
-            if (isDictLoaded)
+            if (status.HasFlag(IOStatus.OutLoaded))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            Console.WriteLine("dict: Ввод названия файла словаря и его загрузка в память.");
+            Console.WriteLine("output     : Ввод названия выходного файла.");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("info: Информация о данных программы.");
-            if (isDictLoaded & isInLoaded & isOutLoaded)
+            if (status.HasFlag(IOStatus.DictLoaded))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
             }
-            Console.WriteLine("correct: Корректировка html.");
+            Console.WriteLine("dict       : Ввод названия файла словаря и его загрузка в память.");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("exit: Выход.");
+            Console.WriteLine("info       : Информация о данных программы.");
+            if (status.HasFlag(IOStatus.DictLoaded | IOStatus.InLoaded | IOStatus.OutLoaded))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            Console.WriteLine("correct    : Корректировка html.");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("exit       : Выход.");
         }
         /// <summary>
         /// Ввод названия входного файла и проверка на его существование
         /// </summary>
         /// <returns></returns>
-        private bool EnterInFile() 
+        private void EnterInFile()
         {
+            Console.Clear();
             Console.Write("Enter input file name: ");
             InputFileName = Console.ReadLine();
             try
@@ -142,56 +154,57 @@ namespace HtmlCorrectorApp
                 {
                     Console.WriteLine("Warning! No such input file.");
                     InputFileName = null;
-                    return false;
+                    return;
                 }
             }
             catch (System.ArgumentException ex)
             {
                 Console.WriteLine("Warning! Invalid input file name or path.");
                 InputFileName = null;
-                return false;
+                return;
             }
-            return true;
+            status &= IOStatus.InLoaded;
         }
         /// <summary>
         /// Ввод названия выходного файла
         /// </summary>
         /// <returns></returns>
-        private bool EnterOutFile()
+        private void EnterOutFile()
         {
+            Console.Clear();
             Console.Write("Enter output file name: ");
             OutputFileName = Console.ReadLine();
             if (OutputFileName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
             {
                 Console.WriteLine("Warning! Output file name contains invalid symbols.");
                 OutputFileName = null;
-                return false;
+                return;
             }
-            return true;
+            status &= IOStatus.OutLoaded;
         }
         /// <summary>
         /// Ввод названия файла словаря проверка на его существование и загрузка в память
         /// </summary>
         /// <returns></returns>
-        private bool EnterDict() 
+        private void EnterDict()
         {
-            bool status = false;
+            Console.Clear();
             Console.Write("Enter dictionary file name: ");
-            DictLocation = Console.ReadLine(); 
+            DictLocation = Console.ReadLine();
             if (new FileInfo(DictLocation).Exists == false)
             {
                 Console.WriteLine("Warning! No such dictionary file");
                 InputFileName = null;
-                return status;
+                DictLocation = null;
+                return;
             }
             using (StreamReader reader = File.OpenText(DictLocation))
             {
                 string input = null;
                 while (((input = reader.ReadLine()) != null) && (dictionary.Count < 100000)) //загружаем словарь
                 { dictionary.Add(input); }
-                status = true;
+                status &= IOStatus.DictLoaded;
             }
-            return status;
         }
         /// <summary>
         /// Метод реализующий работу меню
@@ -202,20 +215,20 @@ namespace HtmlCorrectorApp
             while (menuCode != "exit")
             {
                 ShowMenu();
-                Console.Write("Enter command code: ");
+                Console.Write("\nEnter command code: ");
                 menuCode = Console.ReadLine();
                 switch (menuCode)
                 {
                     case "input": //Ввод названия входного файла
-                        isInLoaded = EnterInFile();
+                        EnterInFile();
                         Console.ReadLine();
                         break;
                     case "output": //Ввод названия выходного файла
-                        isOutLoaded = EnterOutFile();
+                        EnterOutFile();
                         Console.ReadLine();
                         break;
                     case "dict": //Ввод названия файла словаря и его загрузка в память
-                        isDictLoaded = EnterDict();
+                        EnterDict();
                         Console.ReadLine();
                         break;
                     case "info": // Информация о данных программы
@@ -223,7 +236,7 @@ namespace HtmlCorrectorApp
                         Console.ReadLine();
                         break;
                     case "correct": // Корректировка html
-                        if (isDictLoaded & isInLoaded & isOutLoaded)
+                        if (status.HasFlag((IOStatus.DictLoaded | IOStatus.InLoaded | IOStatus.OutLoaded)))
                         { CorrectHtml(); }
                         break;
                     default:

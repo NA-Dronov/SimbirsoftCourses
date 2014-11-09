@@ -11,8 +11,8 @@ namespace HtmlCorrectorApp
     {
         static void Main(string[] args)
         {
-          HtmlCorrector hc = new HtmlCorrector();
-          hc.menu();
+            HtmlCorrector hc = new HtmlCorrector();
+            hc.menu();
         }
     }
 }
