@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace HtmlCorrectorApp
 {
-    class HtmlCorrector
+    public class HtmlCorrector
     {
+        /// <summary>
+        /// Количество строк (N) в результирующем файле. Если кол-во строк файла превышает данную величину,
+        /// то он разбивается на несколько файлов по N строк в каждом 
+        /// </summary>
+        public int N { get; set; }
         /// <summary>
         /// Расположение html файла
         /// </summary>
