@@ -14,7 +14,23 @@ namespace HtmlCorrectorApp
         /// Количество строк (N) в результирующем файле. Если кол-во строк файла превышает данную величину,
         /// то он разбивается на несколько файлов по N строк в каждом 
         /// </summary>
-        public int N { get; set; }
+        public int N
+        {
+            get 
+            { 
+                return n; 
+            }
+            set
+            {
+                if (value < 10)
+                    n = 10;
+                else if (value > 100000)
+                    n = 100000;
+                else
+                    n = value;
+             } 
+        }
+        private int n;
         /// <summary>
         /// Расположение html файла
         /// </summary>
@@ -32,6 +48,10 @@ namespace HtmlCorrectorApp
         /// </summary>
         private List<string> dictionary = new List<string>();
         /// <summary>
+        /// Размер словаря
+        /// </summary>
+        public int DictSize { get { return dictionary.Count; } }
+        /// <summary>
         /// Флаги состояния отвечающие за состояние входных (словарь, обрабатываемый файл)
         /// и выходных файлов. Если файл подключен, выставляется соответсвующий флаг.
         /// </summary>
@@ -44,11 +64,14 @@ namespace HtmlCorrectorApp
             DictLoaded = 0x4
         }
         private IOStatus status;
+        public IOStatus Status { get { return status; } }
         public HtmlCorrector()
         {
             status = IOStatus.None;
+            OutputFileName = "";
         }
 
+        #if (DEBUG)
         private void ShowDictionary()
         {
             foreach (string word in dictionary)
@@ -56,49 +79,98 @@ namespace HtmlCorrectorApp
                 Console.WriteLine(word);
             }
         }
+        #endif
         /// <summary>
         /// Метод для загрузки словаря
         /// </summary>
         public void LoadDictionary()
         {
-            // Открыть файл словаря
-            using (StreamReader reader = File.OpenText(DictLocation))
+            try
             {
-                string input = null;
-                while (((input = reader.ReadLine()) != null) && (dictionary.Count < 100000))
-                { dictionary.Add(input); }
+                // Открыть файл словаря
+                using (StreamReader reader = File.OpenText(DictLocation))
+                {
+                    //Очистить словарь и сбросить соответствующий флаг, если он уже существует
+                    if (dictionary.Count != 0)
+                    {
+                        dictionary.Clear();
+                        if (status.HasFlag(IOStatus.DictLoaded))
+                            status = status & ~IOStatus.DictLoaded;
+                    }
+                        
+                    string input = null;
+                    int numOfLine = 1;
+                    while (((input = reader.ReadLine()) != null) && (dictionary.Count < 100000))
+                    {
+                        if (input.Split(' ').Length > 1)
+                            throw new DictionaryWrongFormatException("WARNING! Dictionary has wrong format.\nLine {0}: {1}.\nThe dictionary is not loaded.", numOfLine, input);
+                        dictionary.Add(input);
+                        numOfLine++;
+                    }
+                    status |= IOStatus.DictLoaded;
+                }
+            }
+            catch(FileNotFoundException ex)
+            {
+                //В случае, если файл не найден выдаётся предупреждение
+                Console.WriteLine("WARNING! Dictionary file does not exsists.");
+                DictLocation = null;
+            }
+            catch (DictionaryWrongFormatException ex)
+            {
+                //В случае, если файл имеет неправильную структуру словарь очищается
+                Console.WriteLine(ex.Message);
+                dictionary.Clear();
+                DictLocation = null;
             }
         }
         /// <summary>
         /// Метод для корректировки содержимого html файла
         /// </summary>
-        private void CorrectHtml()
+        public void CorrectHtml()
         {
-            //Открыть файл для чтения
-            using (StreamReader reader = File.OpenText(InputFileName))
+            try
             {
-                //Создать файл для записи
-                using (StreamWriter writer = File.CreateText(OutputFileName))
+                //Открыть файл для чтения
+                using (StreamReader reader = File.OpenText(InputFileName))
                 {
-                    string input = null;
-                    while ((input = reader.ReadLine()) != null)
+                    //Создать файл для записи
+                    using (StreamWriter writer = File.CreateText(OutputFileName))
                     {
-                        Match m = Regex.Match(input, @"\w+"); //Шаблон соответствия
-                        int shift = 0; //Сдвиг
-                        while (m.Success)
+                        string input = null;
+                        while ((input = reader.ReadLine()) != null)
                         {
-                            if (dictionary.Contains(m.Value.ToLower()))
+                            Match m = Regex.Match(input, @"\d*\w+\d*"); //Шаблон соответствия
+                            int shift = 0; //Сдвиг
+                            while (m.Success)
                             {
-                                input = input.Insert(m.Index + shift, "<b>")
-                                    .Insert(m.Index + shift + m.Length + 3, "</b>");
-                                shift += 7; //Количество символов в <b></b>
-                                Console.WriteLine(m.Value);
+                                if (dictionary.Contains(m.Value.ToLower()))
+                                {
+                                    input = input.Insert(m.Index + shift, "<b>")
+                                        .Insert(m.Index + shift + m.Length + 3, "</b>");
+                                    shift += 7; //Количество символов в <b></b>
+                                    Console.WriteLine(m.Value);
+                                }
+                                m = m.NextMatch();
                             }
-                            m = m.NextMatch();
+                            writer.WriteLine(input);
                         }
-                        writer.WriteLine(input);
                     }
                 }
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("WARNING! Input file does not exsists.");
+                InputFileName = null;
+                if (status.HasFlag(IOStatus.InLoaded))
+                    status = status & ~IOStatus.InLoaded;
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("WARNING! Output file does not exsists.");
+                OutputFileName = null;
+                if (status.HasFlag(IOStatus.OutLoaded))
+                    status = status & ~IOStatus.OutLoaded;
             }
         }
         public override string ToString()
@@ -157,18 +229,18 @@ namespace HtmlCorrectorApp
             {
                 if (!new FileInfo(InputFileName).Exists)
                 {
-                    Console.WriteLine("Warning! No such input file.");
+                    Console.WriteLine("WARNING! No such input file.");
                     InputFileName = null;
                     return;
                 }
             }
             catch (System.ArgumentException ex)
             {
-                Console.WriteLine("Warning! Invalid input file name or path.");
+                Console.WriteLine("WARNING! Invalid input file name or path.");
                 InputFileName = null;
                 return;
             }
-            status &= IOStatus.InLoaded;
+            status |= IOStatus.InLoaded;
         }
         /// <summary>
         /// Ввод названия выходного файла
@@ -181,11 +253,11 @@ namespace HtmlCorrectorApp
             OutputFileName = Console.ReadLine();
             if (OutputFileName.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
             {
-                Console.WriteLine("Warning! Output file name contains invalid symbols.");
+                Console.WriteLine("WARNING! Output file name contains invalid symbols.");
                 OutputFileName = null;
                 return;
             }
-            status &= IOStatus.OutLoaded;
+            status |= IOStatus.OutLoaded;
         }
         /// <summary>
         /// Ввод названия файла словаря проверка на его существование и загрузка в память
@@ -196,20 +268,7 @@ namespace HtmlCorrectorApp
             Console.Clear();
             Console.Write("Enter dictionary file name: ");
             DictLocation = Console.ReadLine();
-            if (new FileInfo(DictLocation).Exists == false)
-            {
-                Console.WriteLine("Warning! No such dictionary file");
-                InputFileName = null;
-                DictLocation = null;
-                return;
-            }
-            using (StreamReader reader = File.OpenText(DictLocation))
-            {
-                string input = null;
-                while (((input = reader.ReadLine()) != null) && (dictionary.Count < 100000)) //загружаем словарь
-                { dictionary.Add(input); }
-                status &= IOStatus.DictLoaded;
-            }
+            LoadDictionary();
         }
         /// <summary>
         /// Метод реализующий работу меню
