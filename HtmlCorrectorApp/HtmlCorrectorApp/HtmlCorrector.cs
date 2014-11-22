@@ -68,6 +68,7 @@ namespace HtmlCorrectorApp
         public HtmlCorrector()
         {
             status = IOStatus.None;
+            N = 1000;
             OutputFileName = "";
         }
 
@@ -134,28 +135,32 @@ namespace HtmlCorrectorApp
                 //Открыть файл для чтения
                 using (StreamReader reader = File.OpenText(InputFileName))
                 {
+                    //Счетчик для добавления в название файла
+                    int i = 0;
                     //Создать файл для записи
-                    using (StreamWriter writer = File.CreateText(OutputFileName))
-                    {
-                        string input = null;
-                        while ((input = reader.ReadLine()) != null)
+                    while (!reader.EndOfStream)
+                        using (StreamWriter writer = File.CreateText(OutputFileName + (i++) + ".html"))
                         {
-                            Match m = Regex.Match(input, @"\d*\w+\d*"); //Шаблон соответствия
-                            int shift = 0; //Сдвиг
-                            while (m.Success)
+                            string input = null;
+                            int string_count = 0; // Количество записанных в файл строк
+                            while (((input = reader.ReadLine()) != null) && (string_count < N))
                             {
-                                if (dictionary.Contains(m.Value.ToLower()))
+                                Match m = Regex.Match(input, @"\d*\w+\d*"); //Шаблон соответствия
+                                int shift = 0; //Сдвиг
+                                while (m.Success)
                                 {
-                                    input = input.Insert(m.Index + shift, "<b>")
-                                        .Insert(m.Index + shift + m.Length + 3, "</b>");
-                                    shift += 7; //Количество символов в <b></b>
-                                    Console.WriteLine(m.Value);
+                                    if (dictionary.Contains(m.Value.ToLower()))
+                                    {
+                                        input = input.Insert(m.Index + shift, "<b>")
+                                            .Insert(m.Index + shift + m.Length + 3, "</b>");
+                                        shift += 7; //Количество символов в <b></b>
+                                    }
+                                    m = m.NextMatch();
                                 }
-                                m = m.NextMatch();
+                                writer.WriteLine(input);
+                                string_count++;
                             }
-                            writer.WriteLine(input);
                         }
-                    }
                 }
             }
             catch (ArgumentNullException ex)
@@ -177,11 +182,12 @@ namespace HtmlCorrectorApp
         {
             Console.Clear();
             return string.Format("Input  file: {0}\n" + 
-                "Output file: {1}\n"  + 
-                "Dictionary :\n"      + 
-                " 1.File Name - {2}\n" + 
-                " 2.Size      - {3}",
-                InputFileName, OutputFileName, DictLocation, dictionary.Count);
+                "Output file     : {1}\n"  + 
+                "Strings per file: {2}"    +
+                "Dictionary      :\n"      + 
+                " 1.File Name - {3}\n" + 
+                " 2.Size      - {4}",
+                InputFileName, OutputFileName, N, DictLocation, dictionary.Count);
         }
         /// <summary>
         /// Вывод меню в консоль
@@ -201,6 +207,7 @@ namespace HtmlCorrectorApp
             }
             Console.WriteLine("output     : Ввод названия выходного файла.");
             Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("length     : Количество строк в выходных файлах (по умолчанию 1000).");
             if (status.HasFlag(IOStatus.DictLoaded))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -219,7 +226,6 @@ namespace HtmlCorrectorApp
         /// <summary>
         /// Ввод названия входного файла и проверка на его существование
         /// </summary>
-        /// <returns></returns>
         private void EnterInFile()
         {
             Console.Clear();
@@ -245,7 +251,6 @@ namespace HtmlCorrectorApp
         /// <summary>
         /// Ввод названия выходного файла
         /// </summary>
-        /// <returns></returns>
         private void EnterOutFile()
         {
             Console.Clear();
@@ -260,9 +265,29 @@ namespace HtmlCorrectorApp
             status |= IOStatus.OutLoaded;
         }
         /// <summary>
+        /// Ввод количества строк на каждый выходной файл
+        /// </summary>
+        private void EnterLength()
+        {
+            Console.Clear();
+            Console.Write("Enter number of strings per file: ");
+            string temp = Console.ReadLine();
+            try
+            {
+                N = Convert.ToInt32(temp);
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine("WARNING! Input string is not a sequence of digits.");
+            }
+            catch (OverflowException ex)
+            {
+                Console.WriteLine("WARNING! The number cannot fit in an Int32.");
+            }
+        }
+        /// <summary>
         /// Ввод названия файла словаря проверка на его существование и загрузка в память
         /// </summary>
-        /// <returns></returns>
         private void EnterDict()
         {
             Console.Clear();
@@ -289,6 +314,10 @@ namespace HtmlCorrectorApp
                         break;
                     case "output": //Ввод названия выходного файла
                         EnterOutFile();
+                        Console.ReadLine();
+                        break;
+                    case "length":
+                        EnterLength();
                         Console.ReadLine();
                         break;
                     case "dict": //Ввод названия файла словаря и его загрузка в память
