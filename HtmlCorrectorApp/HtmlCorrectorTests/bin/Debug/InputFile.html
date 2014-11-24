@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="ru">
+    <head><link rel="canonical" href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx" />
+        <title>Пошаговое руководство. Создание и запуск модульных тестов для управляемого кода</title>
+        
+        
+
+
+
+
+
+
+<meta name="DCS.dcsuri" content="/ru-ru/library/ms182532(d=default,l=ru-ru,v=vs.120).aspx" />
+
+<meta name="NormalizedUrl" content="http://msdn.microsoft.com/ru-ru/library/ms182532(d=default,l=ru-ru,v=vs.120).aspx" />
+
+<meta name="ms.normalizedurl" content="http://msdn.microsoft.com/ru-ru/library/ms182532(d=default,l=ru-ru,v=vs.120).aspx" />
+
+<meta name="DCSext.ProductFamily" content="LIB_DG" />
+
+<meta name="DCSext.Product" content="ALM_test" />
+
+<meta name="DCSext.Title" content="Пошаговое руководство. Создание и запуск модульных тестов для управляемого кода" />
+
+<meta name="VotingContextUrl" content="http://msdn.microsoft.com/ru-ru/library/ms182532(d=default,l=ru-ru,v=vs.120).aspx" />
+
+<meta name="MN" content="EE4293BE-12:18:14 PM" />
+
+<meta name="Search.ShortId" content="ms182532" />
+
+<meta name="ms.shortidmsdn" content="ms182532" />
+
+<meta name="Ms.Locale" content="ru-ru" />
+
+<meta name="ms.prodver" content="VS.120" />
+
+<meta name="ms.contentlang" content="RU" />
+
+<meta name="ms.lang" content="RU" />
+
+<meta name="ms.loc" content="RU" />
+
+<meta name="ms.sitever" content="2014.11.14.1" />
+
+<meta name="ms.assetid" content="2b018b18-b412-4e0e-b0ee-b580a2f3ba9c" />
+
+<meta name="ms.auth" content="0" />
+
+
+
+
+
+
+
+
+        
+    <link rel="stylesheet" type="text/css" href="http://i3.msdn.microsoft.com/Combined.css?resources=0:Topic,0:CodeSnippet,0:ProgrammingSelector,0:ExpandableCollapsibleArea,1:CommunityContent,0:TopicNotInScope,0:FeedViewerBasic,0:ImageSprite,2:Header,2:HeaderFooterSprite,3:LinkList,4:PrintExportButton,1:Toc,1:NavigationResize,1:TranslationWiki,1:jquery.popup,0:VersionSelector,1:LibraryMemberFilter,2:Footer,3:FooterSock,3:Base,5:Msdn;/Areas/Epx/Content/Css:0,/Areas/Library/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Epx/Themes/Base/Content:3,/Areas/Library/Themes/Base/Content:4,/Areas/Library/Themes/Msdn/Content:5&amp;amp;v=8D2CF467F83A598108002E85B1F563B4" /></head>
+    <body class="library Chrome">
+        <div id="page">
+            
+            
+            
+            
+    
+
+    
+    <link type="text/css" rel="stylesheet" />
+    
+    <input type="hidden" id="isHeaderBleeding" value="true" />
+    <div id="ux-header" dir="ltr" class="ltr msdn">
+        
+
+        <header>
+            <div class="row">
+                <div class="top mobile"></div>
+                <div class="left">
+                    <div class="siteLogo">  
+                        
+                            <a class="msdnLogoImg" href="http://msdn.microsoft.com/ru-ru">
+                               <img src="http://i.msdn.microsoft.com/Areas/Centers/Themes/StandardDevCenter/Content/Images/microsoftLogoForHeader.png?v=635515613458982730" />
+                            </a>
+                                                             
+                        <div data-fragmentName="SiteLogo" id="Fragment_SiteLogo" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="LinkWithImage topImage">
+    <a id="SiteLogo_2152_1" href="http://msdn.microsoft.com/ru-ru">
+      <img id="msdnLogo-black" src="http://i.msdn.microsoft.com/ru-ru/msdn/ux/library/dn610975.msdnLogo-black.jpg?Segments=%2flibrary&amp;isLibrary=true&amp;isMtpsRequest=true&amp;HideProfileLink=true" xmlns="" />
+      <span></span>
+    </a>
+  </div>
+</div>    
+
+                    </div>
+                    <a id="grip" href="javascript:void(0)"></a>
+                </div>
+                
+                <div class="right desktop">
+                    <div class="auxNav">
+                        <div id="signIn">
+
+<a class="scarabLink" href="https://login.live.com/login.srf?wa=wsignin1.0&amp;rpsnv=12&amp;ct=1416773894&amp;rver=6.0.5276.0&amp;wp=MCLBI&amp;wlcxt=MSDN%24MSDN%24MSDN&amp;wreply=http%3a%2f%2fmsdn.microsoft.com%2fru-ru%2flibrary%2fms182532.aspx&amp;lc=1049&amp;id=254354&amp;mkt=ru-RU" title="Войти">Войти</a></div>
+
+    
+
+                        <div data-fragmentName="Subscriptions" id="Fragment_Subscriptions" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="https://msdn.microsoft.com/subscriptions/manage/hh442900" id="Subscriptions_2153_1" xmlns="http://www.w3.org/1999/xhtml">
+    <span style="line-height:18px;" xmlns="">Подписки MSDN</span>
+  </a>
+</div>   
+                        <div data-fragmentName="GetTools" id="Fragment_GetTools" xmlns="http://www.w3.org/1999/xhtml">
+  <a href="http://go.microsoft.com/fwlink/?LinkId=309297&amp;clcid=0x0419&amp;slcid=0x0419" id="GetTools_2153_3" xmlns="http://www.w3.org/1999/xhtml">
+    <span style="line-height:18px;" xmlns="">Получить инструменты</span>
+  </a>
+</div>
+                        <div data-fragmentName="SocialLinks" id="Fragment_SocialLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="https://www.facebook.com/msdnru" target="_blank" id="SocialLinks_2152_4" class="facebook" xmlns="http://www.w3.org/1999/xhtml">https://www.facebook.com/msdnru</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/msdevru" target="_blank" id="SocialLinks_2152_5" class="twitter" xmlns="http://www.w3.org/1999/xhtml">https://twitter.com/msdevru</a>
+      </li>
+      <li>
+        <a href="http://vk.com/msdnru" target="_blank" id="SocialLinks_2152_6" class="vkOne" xmlns="http://www.w3.org/1999/xhtml">http://vk.com/msdnru</a>
+      </li>
+    </ul>
+  </div>
+</div> 
+                    </div>
+                    <div data-fragmentName="SearchBox" id="Fragment_SearchBox" xmlns="http://www.w3.org/1999/xhtml">
+  <div class="SearchBox">
+    <form id="HeaderSearchForm" name="HeaderSearchForm" method="get" onsubmit="return Epx.Controls.SearchBox.searchBoxOnSubmit(this);">
+      <input id="HeaderSearchTextBox" name="query" type="text" maxlength="200" onfocus="Epx.Controls.SearchBox.watermarkFocus(event, this.title)" onblur="Epx.Controls.SearchBox.watermarkBlur(event, this.title)" />
+      <button id="HeaderSearchButton" value="" type="submit" class="header-search-button"></button>
+    </form>
+    
+    
+  </div>
+</div> 
+                </div>
+            </div>
+       
+             <div class="row" id="droor">
+                <div class="left toc">
+                    
+        <nav>
+            <ul class="navL1">
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Технологии">Технологии</a>
+                                <ul class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/cloud-app-development-msdn" title="Облако">Облако</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/mobile-app-development-msdn" title="Мобильные">Мобильные</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/web-app-development-msdn" title="Интернет">Интернет</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/business-and-productivity-app-development-msdn" title="Бизнес">Бизнес</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/big-data-development-msdn" title="Данные">Данные</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/games-development-msdn" title="Игры">Игры</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Загрузки">Загрузки</a>
+                                <ul class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://go.microsoft.com/fwlink/?linkid=307137&amp;clcid=0x419" title="Visual Studio">Visual Studio</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/subscriptions/" title="Подписки MSDN">Подписки MSDN</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://msdn.microsoft.com/microsoft-sdks-msdn" title="Пакеты SDK">Пакеты SDK</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Программы">Программы</a>
+                                <ul class="navL2">
+                                        <li class="inactive">
+                                            <a href="http://www.microsoft.com/bizspark" title="BizSpark">BizSpark</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Студентам">Студентам</a>
+
+                                                <ul class="navL3">
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/students-overview-msdn" title="Общие сведения">Общие сведения</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/students-develop-msdn" title="Разработка приложений">Разработка приложений</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="Архитекторам">Архитекторам</a>
+
+                                                <ul class="navL3">
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-overview-msdn" title="Общие сведения">Общие сведения</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-case-studies-msdn" title="Конкретные примеры">Конкретные примеры</a>
+                                                        </li>
+                                                        <li class="inactive">
+                                                            <a href="http://msdn.microsoft.com/architects-blueprints-msdn" title="Проекты">Проекты</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                        <li class="inactive toggle">
+                                            <a href="javascript:void(0)" title="События">События</a>
+
+                                                <ul class="navL3">
+                                                        <li class="inactive">
+                                                            <a href="http://events.msdn.microsoft.com/en-us" title="Найти события">Найти события</a>
+                                                        </li>
+                                                </ul>
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive toggle">
+                            <a href="javascript:void(0)" title="Сообщество">Сообщество</a>
+                                <ul class="navL2">
+                                        <li class="inactive">
+                                            <a href="https://social.msdn.microsoft.com/forums/" title="Форумы">Форумы</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://blogs.msdn.com/b/developer-tools/" title="Блоги">Блоги</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://tech-advisors.msdn.microsoft.com/ru-ru/" title="Технические консультанты">Технические консультанты</a>
+
+                                                   
+                                        </li>
+                                        <li class="inactive">
+                                            <a href="http://channel9.msdn.com/" title="Канал Channel 9">Канал Channel 9</a>
+
+                                                   
+                                        </li>
+                                </ul>
+                        </li>
+                        <li class="inactive current">
+                            <a href="http://msdn.microsoft.com/library/" title="Документация">Документация</a>
+                        </li>
+                        <li class="inactive">
+                            <a href="https://code.msdn.microsoft.com/" title="Примеры">Примеры</a>
+                        </li>
+            </ul>
+        </nav>
+                
+                </div>
+                <div class="right mobile"></div>
+                
+                <span id="singleCol"></span>
+                <span id="doubleCol"></span>
+             </div>
+        </header>
+    </div>
+    
+    
+
+        
+    <div class="printExportMenus ltr">
+        <a id="isd_printABook" href="/ru-ru/library/export/help/?returnUrl=%2fru-ru%2flibrary%2fms182532.aspx">
+            Экспорт (<span class="count">0</span>)
+        </a>
+        <a id="isd_print" href="http://msdn.microsoft.com/ru-ru/library/ms182532(d=printer).aspx" rel="nofollow">
+            Печать 
+        </a>
+    </div>
+    
+
+        <div class="printExportMenus ltr">
+        <a id="expandCollapseAll" accesskey="e" href="javascript:void(0)" title="Expand/Collapse all sections by pressing Ctrl + Shift + e">Развернуть все</a>
+    </div>
+
+    
+
+
+            <div id="body">
+                
+
+
+
+
+
+
+
+
+    <div id="leftNav">
+
+
+
+<div id="tocnav">
+
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/ms123401.aspx" id="ms310241_MSDN.10_ru-ru" mtpsaliasid="" mtpsassetid="5DDC0A78-6B2C-43E3-9C56-55F45C0DFFA5_MSDN.10_ru-ru" mtpsshortid="ms123401_MSDN.10_ru-ru" title="MSDN Library">MSDN Library</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/aa187916.aspx" id="aa187916_MSDN.10_ru-ru" mtpsaliasid="" mtpsassetid="MSDN|devtoolslang|$\devtoolslang.hxt@0,0_MSDN.10_ru-ru" mtpsshortid="aa187916_MSDN.10_ru-ru" title="Средства разработки">Средства разработки</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/dd831853.aspx" id="dn436406_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="ba237712-f8c4-4d13-854b-ab4a16afa309_VS.120_ru-ru" mtpsshortid="dd831853_VS.120_ru-ru" title="Вас приветствует программа Visual Studio 2013">Вас приветствует программа Visual Studio 2013</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/h8w79z10.aspx" id="ms306060_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="97490c1b-a247-41fb-8f2c-bc4c201eff68_VS.120_ru-ru" mtpsshortid="h8w79z10_VS.120_ru-ru" title="Разработка приложений в Visual Studio">Разработка приложений в Visual Studio</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/dd264943.aspx" id="dd233475_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="73baa961-c21f-43fe-bb92-3f59ae9b5945_VS.120_ru-ru" mtpsshortid="dd264943_VS.120_ru-ru" title="Средства обеспечения качества и диагностики">Средства обеспечения качества и диагностики</a>            </div>
+            <div class="toclevel0" data-toclevel="0">
+<a data-tochassubtree="true" href="/ru-ru/library/dd264975.aspx" id="dd468230_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="c191de3e-3f3b-471e-b828-29ec24e80e2c_VS.120_ru-ru" mtpsshortid="dd264975_VS.120_ru-ru" title="Проверка кода при помощи модульных тестов">Проверка кода при помощи модульных тестов</a>            </div>
+            <div class="toclevel1" data-toclevel="1">
+<a data-tochassubtree="true" href="/ru-ru/library/hh598960.aspx" id="hh409606_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="fbeba971-c468-4429-8017-0f12ab55638c_VS.120_ru-ru" mtpsshortid="hh598960_VS.120_ru-ru" title="Написание модульных тестов для платформы .NET Framework с использованием платформы модульного тестирования Майкрософт для управляемого кода">Написание модульных тестов для платформы .NET Framework с использованием платформы модульного тестирования Майкрософт для управляемого кода</a>            </div>
+            <div class="toclevel2 current" data-toclevel="2">
+<a href="/ru-ru/library/ms182532.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Пошаговое руководство. Создание и запуск модульных тестов для управляемого кода">Пошаговое руководство. Создание и запуск модульных тестов для управляемого кода</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/hh212233.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Краткое руководство. Разработка через тестирование с использованием обозревателя тестов">Краткое руководство. Разработка через тестирование с использованием обозревателя тестов</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/ff770525.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Использование членов Microsoft.VisualStudio.TestTools.UnitTesting в модульных тестах">Использование членов Microsoft.VisualStudio.TestTools.UnitTesting в модульных тестах</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/ms182530.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Использование классов Assert">Использование классов Assert</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a data-tochassubtree="true" href="/ru-ru/library/hh549175.aspx" id="jj948661_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Изоляция тестируемого кода с помощью Microsoft Fakes">Изоляция тестируемого кода с помощью Microsoft Fakes</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a data-tochassubtree="true" href="/ru-ru/library/ms182527.aspx" id="jj948662_VS.120_ru-ru" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Практическое руководство. Создание модульного теста, управляемого данными">Практическое руководство. Создание модульного теста, управляемого данными</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/ms243401.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Модульные тесты для универсальных методов">Модульные тесты для универсальных методов</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/gg601487.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Практическое руководство. Настройка модульных тестов для более ранней версии .NET Framework">Практическое руководство. Настройка модульных тестов для более ранней версии .NET Framework</a>            </div>
+            <div class="toclevel2" data-toclevel="2">
+<a href="/ru-ru/library/ms243176.aspx" mtpsaliasid="" mtpsassetid="" mtpsshortid="" title="Пример проекта для создания модульных тестов">Пример проекта для создания модульных тестов</a>            </div>
+</div>
+        
+
+        
+
+        
+        
+        <div id="toc-resizable-ew" class="toc-resizable-ew"></div>
+        
+
+<a id="NavigationResize" href="javascript:void(0)">
+    <img class="cl_nav_resize_open" src="http://i3.msdn.microsoft.com/Areas/Epx/Content/Images/ImageSprite.png?v=635515613509633256" title="Развернуть" alt="Развернуть" />
+    <img class="cl_nav_resize_close" src="http://i3.msdn.microsoft.com/Areas/Epx/Content/Images/ImageSprite.png?v=635515613509633256" title="Свернуть" alt="Свернуть" />
+</a>
+
+
+
+    </div>
+<div id="content" class="content">
+
+
+
+<div id="MTPSTranslator" class="MTPSTranslator">
+    <table class="MTPSTranslatorTable" style="width: 100%">
+        <tr>
+            <td class="TranslationAlertBox">
+                <div>Эта статья переведена вручную. Наведите указатель мыши на предложения статьи, чтобы просмотреть исходный текст. <a href="/translate/hh856053">Дополнительные сведения.</a></div>
+            </td>
+                <td class="TranslationViewSwitcher">
+                    <div>
+                        <input title="Показать перевод" value="0" name="TrnaslatorView" type="radio" class="translatechoice" checked="checked" /><span>Перевод</span>
+                    </div>
+                    <div>
+                        <input title="Показать текст на английском языке" value="1" name="TrnaslatorView" type="radio" class="translatechoice" /><span>Текст оригинала</span>
+                    </div>
+                </td>
+        </tr>
+    </table>
+</div>
+    
+    
+    
+     
+
+
+
+
+    
+    <div id="FeedbackCounterUrl" data-url="/ru-ru/library/feedbackcounterasync/ms182532.aspx"></div>
+    <div id="FeedbackCounterPlaceHolder"></div>
+
+
+        
+
+<div class="topic" xmlns="http://www.w3.org/1999/xhtml">
+  <h1 class="title">Пошаговое руководство. Создание и запуск модульных тестов для управляемого кода</h1>
+  
+  <div class="lw_vs">
+    <div id="curversion">
+      <strong>
+            Visual Studio 2013 
+        </strong>
+    </div>
+    <div id="versionclick">
+      <div id="vsseperator" class="cl_lw_vs_seperator"></div>
+      <div>
+        <div>
+          <a id="vsLink" href="javascript:;">
+                        Другие версии
+                    </a>
+        </div>
+        <div class="cl_vs_arrow clip10x10">
+          <img class="cl_lw_vs_arrow" id="vsArrow" alt="" src="http://i3.msdn.microsoft.com/Areas/Epx/Content/Images/ImageSprite.png?v=635515613509633256" />
+        </div>
+      </div>
+      <ul id="vsPanel">
+        <li>
+          <a href="/ru-ru/library/ms182532(v=vs.100).aspx">Visual Studio 2010</a>
+        </li>
+        <li>
+          <a href="/ru-ru/library/ms182532(v=vs.110).aspx">Visual Studio 2012</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="clear:both;"></div>
+  
+  <div id="mainSection">
+    <div id="mainBody">
+      <div class="introduction">
+        <p>
+          <span id="mt1" class="sentence" data-guid="f4f79965ee91c5fe1b304a0e0bd3d810" data-source="This walkthrough will step you through creating, running, and customizing a series of unit tests using the Microsoft unit test framework for managed code and the Visual Studio Test Explorer." xml:space="preserve">
+            <sentenceText xmlns="http://www.w3.org/1999/xhtml">В этом пошаговом руководстве приводится подробное описание процесса создания, запуска и настройки набора модульных тестов с помощью платформы модульных тестов Microsoft для управляемого кода и обозревателя тестов Visual Studio.</sentenceText>
+          </span>  <span id="mt2" class="sentence" data-guid="c82f76b1f852a144825db529e578c4a1" data-source="You start with a C# project that is under development, create tests that exercise its code, run the tests, and examine the results." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В руководстве производится создание проекта C#, находящегося в стадии разработки, создание тестов для проверки его кода, запуск тестов и изучение результатов.</sentenceText></span>  <span id="mt3" class="sentence" data-guid="f2069b41a90fe5d01d3cab3e414cc16f" data-source="Then you can change your project code and re-run the tests." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">После этого производится изменение кода проекта и повторный запуск тестов.</sentenceText></span>  </p>
+        <p>
+          <span id="mt4" class="sentence" data-guid="31777712e92f9ad09ace2af63077c305" data-source="This topic contains the following sections:" xml:space="preserve">
+            <sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Этот раздел содержит следующие подразделы.</sentenceText>
+</sentenceText>
+          </span>
+        </p>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_prepare_the_walkthrough">Подготовка к выполнению пошагового руководства</a>
+          </span>
+        </p>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_create_a_unit_test_project">Создание проекта модульного теста</a>
+          </span>
+        </p>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_create_the_test_class">Создание тестового класса</a>
+          </span>
+        </p>
+        <ul>
+          <li>
+            <p>
+              <span>
+                <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_test_class_requirements">Требования к тестовому классу</a>
+              </span>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_create_the_first_test_method">Создание первого тестового метода</a>
+          </span>
+        </p>
+        <ul>
+          <li>
+            <p>
+              <span>
+                <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_test_method_requirements">Требования к методу теста</a>
+              </span>
+            </p>
+          </li>
+        </ul>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_build_and_run_the_test">Сборка и запуск теста</a>
+          </span>
+        </p>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_fix_your_code_and_rerun_your_tests">Исправление кода и повторный запуск тестов</a>
+          </span>
+        </p>
+        <p>
+          <span>
+            <a href="http://msdn.microsoft.com/ru-ru/library/ms182532.aspx#bkmk_use_unit_tests_to_improve_your_code">Использование модульных тестов для улучшения кода</a>
+          </span>
+        </p>
+        <div class="alert">
+          <table>
+            <tr>
+              <th>
+                
+                <img id="alert_note" alt="Примечание" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Примечание" xmlns="" class="cl_IC101471" />
+                <strong>Примечание</strong>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span id="mt5" class="sentence" data-guid="e21b3a7cbcfec3fb306456fae408272b" data-source="This walkthrough uses the Microsoft unit test framework for managed code." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В этом пошаговом руководстве используется платформа модульных тестов Microsoft для управляемого кода.</sentenceText>
+                  </span>  <span id="mt6" class="sentence" data-guid="685b64d84427f06ce079cd991ad4ef1a" data-source="Test Explorer also can run tests from third party unit test frameworks that have adapters for Test Explorer." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Обозреватель тестов также может запускать тесты c платформ модульных тестов стороннего производителя, которые имеют адаптеры для обозревателя тестов.</sentenceText></span>  <span id="mt7" class="sentence" data-guid="0e0302b57b6ac6b4724384b7d84ad017" data-source="For more information, see &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;How to: Install Third-Party Unit Test Frameworks&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Дополнительные сведения см. в разделе <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/hh598952.aspx">Практическое руководство. Установка платформ модульного тестирования сторонних поставщиков</a></span>.</sentenceText></span>   </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="alert">
+          <table>
+            <tr>
+              <th>
+                
+                <img id="alert_note" alt="Примечание" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Примечание" xmlns="" class="cl_IC101471" />
+                <strong>Примечание</strong>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span id="mt8" class="sentence" data-guid="dce9d3f3fd344881669bfd04e893f6a7" data-source="For information about how to run tests from a command line, see &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;Walkthrough: using the command-line test utility&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Сведения о запуске тестов из командной строки см. в разделе <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/ms182490.aspx">Пошаговое руководство. Использование служебной программы для тестирования с интерфейсом командной строки</a></span>.</sentenceText>
+                  </span>
+                </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Обязательные компоненты</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="prerequisitesToggle">
+            
+          </a>
+          <ul>
+            <li>
+              <p>
+                <span id="mt9" class="sentence" data-guid="7da86cdb0cf94fd9b20a7b1eb26a7ecb" data-source="The Bank project." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Проект "Банк".</sentenceText>
+                </span>  <span id="mt10" class="sentence" data-guid="1e13d5c0d20798e737e683ec157893ae" data-source="See &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;Sample Project for Creating Unit Tests&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">См. раздел <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/ms243176.aspx">Пример проекта для создания модульных тестов</a></span>.</sentenceText></span>  </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <a id="BKMK_Prepare_the_walkthrough">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Подготовка к выполнению пошагового руководства</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle0">
+            
+          </a>
+          <h3 class="procedureSubHeading">Подготовка к выполнению пошагового руководства</h3>
+          <div class="subSection">
+            <ol>
+              <li>
+                <p>
+                  <span id="mt11" class="sentence" data-guid="8b2601cadad35be3bd3b8044d71d41ae" data-source="Open Visual Studio." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Запустите Visual Studio.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt12" class="sentence" data-guid="606371b2d8e1ffcfcaf12cc7911aad9b" data-source="On the &lt;span class=&quot;label&quot;&gt;File&lt;/span&gt; menu, point to &lt;span class=&quot;label&quot;&gt;New&lt;/span&gt; and then click &lt;span class=&quot;label&quot;&gt;Project&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В меню <span class="label" xmlns="http://www.w3.org/1999/xhtml">Файл</span> выберите пункт <span class="label" xmlns="http://www.w3.org/1999/xhtml">Создать</span>, а затем команду <span class="label" xmlns="http://www.w3.org/1999/xhtml">Проект</span>.</sentenceText>
+                  </span>
+                </p>
+                <p>
+                  <span id="mt13" class="sentence" data-guid="d448a09f2ab5fb11f467e28ced13ac18" data-source="The &lt;span class=&quot;label&quot;&gt;New Project&lt;/span&gt; dialog box appears. " xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Откроется диалоговое окно <span class="label" xmlns="http://www.w3.org/1999/xhtml">Создание проекта</span>. </sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt14" class="sentence" data-guid="03fb49e2f7b47db879fdf76a2dce1f05" data-source="Under &lt;span class=&quot;label&quot;&gt;Installed Templates&lt;/span&gt;, click &lt;span class=&quot;label&quot;&gt;Visual C#&lt;/span&gt;. " xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В области <span class="label" xmlns="http://www.w3.org/1999/xhtml">Установленные шаблоны</span> выберите шаблон <span class="label" xmlns="http://www.w3.org/1999/xhtml">Visual C#</span>. </sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt15" class="sentence" data-guid="de09da696af9cb293660333736254c51" data-source="In the list of application types, click &lt;span class=&quot;label&quot;&gt;Class Library&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В списке типов приложения выберите пункт <span class="label" xmlns="http://www.w3.org/1999/xhtml">Библиотека классов</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt16" class="sentence" data-guid="4ad2dac3ec2b4cd6d6db88594c970ce8" data-source="In the &lt;span class=&quot;label&quot;&gt;Name&lt;/span&gt; box, type &lt;span class=&quot;input&quot;&gt;Bank&lt;/span&gt; and then click &lt;span class=&quot;label&quot;&gt;OK&lt;/span&gt;. " xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В поле <span class="label" xmlns="http://www.w3.org/1999/xhtml">Имя</span> введите <span class="input" xmlns="http://www.w3.org/1999/xhtml">Bank</span> и нажмите кнопку <span class="label" xmlns="http://www.w3.org/1999/xhtml">ОК</span>. </sentenceText>
+                  </span>
+                </p>
+                <div class="alert">
+                  <table>
+                    <tr>
+                      <th>
+                        
+                        <img id="alert_note" alt="Примечание" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Примечание" xmlns="" class="cl_IC101471" />
+                        <strong>Примечание</strong>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>
+                          <span id="mt17" class="sentence" data-guid="a5bfc61835d0d88edc943661997af637" data-source="If the name &quot;Bank&quot; is already used, choose another name for the project. " xml:space="preserve">
+                            <sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Если имя "Bank" уже существует, выберите другое имя для проекта.</sentenceText>
+</sentenceText>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <p>
+                  <span id="mt18" class="sentence" data-guid="b4e4e07d02768dfe3694d0fedaaa0721" data-source="The new Bank project is created and displayed in Solution Explorer with the Class1.cs file open in the Code Editor. " xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Будет создан новый проект Bank. Этот проект отобразится в обозревателе решений, а его файл Class1.cs откроется в редакторе кода. </sentenceText>
+                  </span>
+                </p>
+                <div class="alert">
+                  <table>
+                    <tr>
+                      <th>
+                        
+                        <img id="alert_note" alt="Примечание" src="http://i.msdn.microsoft.com/areas/global/content/clear.gif" title="Примечание" xmlns="" class="cl_IC101471" />
+                        <strong>Примечание</strong>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>
+                          <span id="mt19" class="sentence" data-guid="4108768b1f578e3b08dc4a8930d6311e" data-source="If the Class1.cs file is not open in the Code Editor, double-click the file Class1.cs in Solution Explorer to open it." xml:space="preserve">
+                            <sentenceText xmlns="http://www.w3.org/1999/xhtml">Если файл Class1.cs не откроется в редакторе кода, дважды щелкните Class1.cs в обозревателе решений, чтобы открыть этот файл.</sentenceText>
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <span id="mt20" class="sentence" data-guid="94a0d1dd79ca7cdc82a04349dcec1ee4" data-source="Copy the source code from the &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;Sample Project for Creating Unit Tests&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Скопируйте исходный код из раздела <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/ms243176.aspx">Пример проекта для создания модульных тестов</a></span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt21" class="sentence" data-guid="d5ae0793005aaf265defa53a4fe8f481" data-source="Replace the original contents of Class1.cs with the code from the &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;Sample Project for Creating Unit Tests&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Замените исходное содержимое файла Class1.cs кодом из примера <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/ms243176.aspx">Пример проекта для создания модульных тестов</a></span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt22" class="sentence" data-guid="6f1d4116302c101d70c92650edd5702b" data-source="Save the file as BankAccount.cs" xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Сохранение файла как BankAccount.cs</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt23" class="sentence" data-guid="0cde082c31100577758fa88d60154708" data-source="On the &lt;span class=&quot;label&quot;&gt;Build&lt;/span&gt; menu, click &lt;span class=&quot;label&quot;&gt;Build Solution&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В меню <span class="label" xmlns="http://www.w3.org/1999/xhtml">Построение</span> выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Построить решение</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+            </ol>
+            <p>
+              <span id="mt24" class="sentence" data-guid="15810ba3799a57c2d80a590fb0e0625f" data-source="You now have a project named Bank." xml:space="preserve">
+                <sentenceText xmlns="http://www.w3.org/1999/xhtml">Будет создан проект с именем "Bank".</sentenceText>
+              </span>  <span id="mt25" class="sentence" data-guid="15e43a86c9fd94dc12318b581a189e5c" data-source="It contains source code to test and tools to test it with." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Он содержит исходный код, подлежащий тестированию, и средства для его тестирования.</sentenceText></span>  <span id="mt26" class="sentence" data-guid="e11e2f65c3a6442e29989341fb53abb6" data-source="The namespace for Bank, &lt;span class=&quot;label&quot;&gt;BankAccountNS&lt;/span&gt;, contains the public class &lt;span class=&quot;label&quot;&gt;BankAccount&lt;/span&gt;, whose methods you will test in the following procedures." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Пространство имен проекта "Bank", <span class="label" xmlns="http://www.w3.org/1999/xhtml">BankAccountNS</span>, содержит открытый класс <span class="label" xmlns="http://www.w3.org/1999/xhtml">BankAccount</span>, методы которого будут тестироваться в приведенных ниже процедурах.</sentenceText></span>  </p>
+          </div>
+          <p>
+            <span id="mt27" class="sentence" data-guid="28c2ed4d9850ae4d6a08203132bbec4f" data-source="In this quick start, we focus on the &lt;span class=&quot;code&quot;&gt;Debit&lt;/span&gt; method.The Debit method is called when money is withdrawn an account and contains the following code:" xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">В данном кратком руководстве рассматривается метод <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit</span>. Метод Debit вызывается после снятия денег со счета и содержит следующий код:</sentenceText>
+            </span>
+          </p>
+<div id="code-snippet-1" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_348d8c87-92f2-4651-b903-e25c8f55ef7a');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_348d8c87-92f2-4651-b903-e25c8f55ef7a" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">// method under test</span>
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Debit(<span style="color:Blue;">double</span> amount)
+{
+    <span style="color:Blue;">if</span>(amount &gt; m_balance)
+    {
+        <span style="color:Blue;">throw</span> <span style="color:Blue;">new</span> ArgumentOutOfRangeException(<span style="color:#A31515;">"amount"</span>);
+    }
+    <span style="color:Blue;">if</span> (amount &lt; 0)
+    {
+        <span style="color:Blue;">throw</span> <span style="color:Blue;">new</span> ArgumentOutOfRangeException(<span style="color:#A31515;">"amount"</span>);
+    }
+    m_balance += amount;
+}
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</div>
+      </div>
+      <a id="BKMK_Create_a_unit_test_project">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Создание проекта модульного теста</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle1">
+            
+          </a>
+          <p>
+            <span id="mt28" class="sentence" data-guid="3b4e0f400dbe03d7a7f90ef1aade9920" data-source="&lt;span class=&quot;label&quot;&gt;Prerequisite&lt;/span&gt;: Follow the steps in the procedure, &lt;a href=&quot;#PrepareWalkthrough&quot;&gt;Prepare the Walkthrough&lt;/a&gt;." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <span class="label" xmlns="http://www.w3.org/1999/xhtml">Предварительное требование</span>: необходимо выполнить действия, приведенные в подразделе <a href="#PrepareWalkthrough" xmlns="http://www.w3.org/1999/xhtml">Подготовка к выполнению пошагового руководства</a>.</sentenceText>
+            </span>
+          </p>
+          <h3 class="procedureSubHeading">Создание проекта модульного теста</h3>
+          <div class="subSection">
+            <ol>
+              <li>
+                <p>
+                  <span id="mt29" class="sentence" data-guid="4dd7898b122de7f13ebff546d4eb1b84" data-source="On the &lt;span class=&quot;label&quot;&gt;File&lt;/span&gt; menu, choose &lt;span class=&quot;label&quot;&gt;Add&lt;/span&gt;, and then choose &lt;span class=&quot;label&quot;&gt;New Project ...&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В меню <span class="label" xmlns="http://www.w3.org/1999/xhtml">Файл</span> последовательно щелкните <span class="label" xmlns="http://www.w3.org/1999/xhtml">Добавить</span> и <span class="label" xmlns="http://www.w3.org/1999/xhtml">Новый проект...</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt30" class="sentence" data-guid="2ebb7f35e501a208747522a05949eda8" data-source="In the New Project dialog box, expand &lt;span class=&quot;label&quot;&gt;Installed&lt;/span&gt;, expand &lt;span class=&quot;label&quot;&gt;Visual C#&lt;/span&gt;, and then choose &lt;span class=&quot;label&quot;&gt;Test&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В диалоговом окне "Новый проект" разверните узлы <span class="label" xmlns="http://www.w3.org/1999/xhtml">Установленные</span> и <span class="label" xmlns="http://www.w3.org/1999/xhtml">Visual C#</span> и выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Тест</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt31" class="sentence" data-guid="fab5b3cb2c654fe3049ae05dca80dde0" data-source="From the list of templates, select &lt;span class=&quot;label&quot;&gt;Unit Test Project&lt;/span&gt;. " xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В списке шаблонов выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Проект модульного теста</span>. </sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt32" class="sentence" data-guid="69bfc7b8f7a6e9792fd6a34fcce5d498" data-source="In the &lt;span class=&quot;label&quot;&gt;Name&lt;/span&gt; box, enter BankTest, and then choose &lt;span class=&quot;label&quot;&gt;OK&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В поле <span class="label" xmlns="http://www.w3.org/1999/xhtml">Имя</span> введите BankTest и нажмите кнопку <span class="label" xmlns="http://www.w3.org/1999/xhtml">ОК</span>.</sentenceText>
+                  </span>
+                </p>
+                <p>
+                  <span id="mt33" class="sentence" data-guid="c74f00d99676ca37077e6587225bf05d" data-source="The &lt;span class=&quot;label&quot;&gt;BankTests&lt;/span&gt; project is added to the the &lt;span class=&quot;label&quot;&gt;Bank&lt;/span&gt; solution." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Проект <span class="label" xmlns="http://www.w3.org/1999/xhtml">BankTests</span> добавляется в решение <span class="label" xmlns="http://www.w3.org/1999/xhtml">Банк</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt34" class="sentence" data-guid="cad7b945e98ae16534d8209632f47ab7" data-source="In the &lt;span class=&quot;label&quot;&gt;BankTests&lt;/span&gt; project, add a reference to the &lt;span class=&quot;label&quot;&gt;Bank&lt;/span&gt; solution." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В проекте <span class="label" xmlns="http://www.w3.org/1999/xhtml">BankTests</span> добавьте ссылку на решение <span class="label" xmlns="http://www.w3.org/1999/xhtml">Банк</span>.</sentenceText>
+                  </span>
+                </p>
+                <p>
+                  <span id="mt35" class="sentence" data-guid="da9c1239f7886cea626c5258e7b3ce7e" data-source="In Solution Explorer, select &lt;span class=&quot;label&quot;&gt;References&lt;/span&gt; in the &lt;span class=&quot;label&quot;&gt;BankTests&lt;/span&gt; project and then choose &lt;span class=&quot;label&quot;&gt;Add Reference...&lt;/span&gt; from the context menu." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В области "Обозреватель решений" выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Ссылки</span> в проекте <span class="label" xmlns="http://www.w3.org/1999/xhtml">BankTests</span>, а затем выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Добавить ссылку...</span> из контекстного меню.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt36" class="sentence" data-guid="863efd93ee0648002a79c3a8f8779cef" data-source="In the Reference Manager dialog box, expand &lt;span class=&quot;label&quot;&gt;Solution&lt;/span&gt; and then check the &lt;span class=&quot;label&quot;&gt;Bank&lt;/span&gt; item." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">В диалоговом окне "Диспетчер ссылок" разверните <span>Решение</span> и выбирите элемент <span>Bank</span>.</sentenceText>
+</sentenceText>
+                  </span>
+                </p>
+              </li>
+            </ol>
+            <p>
+              
+            </p>
+          </div>
+        </div>
+      </div>
+      <a id="BKMK_Create_the_test_class">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Создание тестового класса</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle2">
+            
+          </a>
+          <p>
+            <span id="mt37" class="sentence" data-guid="31784bca958e26f894a6fb4d09c9212e" data-source="We need a test class for verifying the &lt;span class=&quot;code&quot;&gt;BankAccount&lt;/span&gt; class." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Тестовый класс нужен для проверки класса <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccount</span>.</sentenceText>
+            </span>  <span id="mt38" class="sentence" data-guid="7147b173370dd9a43df181afeeecaaf1" data-source="We can use the UnitTest1.cs that was generated by the project template, but we should give the file and class more descriptive names." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Можно использовать UnitTest1.cs, созданный в шаблоне проекта, но лучше дать файлу и классу более описательные имена.</sentenceText></span>  <span id="mt39" class="sentence" data-guid="8c18861effcb47472573fe7524ce6c93" data-source="We can do that in one step by renaming the file in Solution Explorer." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Можно сделать это за один шаг, переименовав файл в обозревателе решений.</sentenceText></span>  </p>
+          <p>
+            <span class="label">Переименование файла класса</span>
+          </p>
+          <p>
+            <span id="mt40" class="sentence" data-guid="e5413602884e450af645b233ba5f4da2" data-source="In Solution Explorer, select the UnitTest1.cs file in the BankTests project." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">В обозревателе решений выберите файл UnitTest1.cs в проекте BankTests.</sentenceText>
+            </span>  <span id="mt41" class="sentence" data-guid="555a8a3adb93f207e88f0cd5aa9a17a9" data-source="From the context menu, choose &lt;span class=&quot;label&quot;&gt;Rename&lt;/span&gt;, and then rename the file to BankAccountTests.cs." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В контекстном меню выберите команду <span class="label" xmlns="http://www.w3.org/1999/xhtml">Переименовать</span>, а затем переименуйте файл в BankAccountTests.cs.</sentenceText></span>  <span id="mt42" class="sentence" data-guid="43bf2cdbc72a4784e49fc6b3d5cd3861" data-source="Choose &lt;span class=&quot;label&quot;&gt;Yes&lt;/span&gt; on the dialog that asks if you want to rename all references in the project to the code element 'UnitTest1'." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Да</span> в диалоговом окне, предлагающем переименовать все ссылки на элемент кода "UnitTest1" в проекте.</sentenceText></span>  <span id="mt43" class="sentence" data-guid="19a211545bac0e974e971a191c784d7a" data-source="This step changes the name of the class to &lt;span class=&quot;code&quot;&gt;BankAccountTest&lt;/span&gt;." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Этот шаг изменяет имя класса на <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccountTest</span>.</sentenceText></span>  </p>
+          <p>
+            <span id="mt44" class="sentence" data-guid="4235a7ae0b9cef25d7171aa9ab78098d" data-source="The BankAccountTests.cs file now contains the following code:" xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Файл BankAccountTests.cs теперь содержит следующий код:</sentenceText>
+            </span>
+          </p>
+<div id="code-snippet-2" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_7163dfeb-3bcf-424d-9469-68cbed7013eb');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_7163dfeb-3bcf-424d-9469-68cbed7013eb" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">// unit test code</span>
+<span style="color:Blue;">using</span> System;
+<span style="color:Blue;">using</span> Microsoft.VisualStudio.TestTools.UnitTesting;
+
+<span style="color:Blue;">namespace</span> BankTests
+{
+    [TestClass]
+    <span style="color:Blue;">public</span> <span style="color:Blue;">class</span> BankAccountTests
+    {
+        [TestMethod]
+        <span style="color:Blue;">public</span> <span style="color:Blue;">void</span> TestMethod1()
+        {
+        }
+    }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span class="label">Добавление оператора using в тестируемый проект</span></p><p><span id="mt45" class="sentence" data-guid="550797ec0ee020d70c95ad256f11ef63" data-source="We can also add a using statement to the class to let us to call into the project under test without using fully qualified names." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Можно также добавить оператор using в класс, чтобы тестируемый проект можно было вызывать без использования полных имен.</sentenceText></span>  <span id="mt46" class="sentence" data-guid="c04175b2d22e1934e3e3e8f59e6347ce" data-source="At the top of the class file, add:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Вверху файла класса добавьте:</sentenceText></span>  </p>
+<div id="code-snippet-3" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_6a9a16ed-2392-4499-995a-41d62a9c7230');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_6a9a16ed-2392-4499-995a-41d62a9c7230" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Blue;">using</span> BankAccountNS
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<a id="BKMK_Test_class_requirements"></a><h3 class="subHeading"><span><img id="collapse_all" alt="ms182532.collapse_all(ru-ru,VS.120).gif" src="http://i.msdn.microsoft.com/dynimg/IC249240.gif" title="ms182532.collapse_all(ru-ru,VS.120).gif" xmlns="" />Требования к тестовому классу</span></h3><div class="subsection" id="collapseableSection4" expanded="true"><p><span id="mt47" class="sentence" data-guid="39ea599dd343bcf81fe7f858f189939c" data-source="The minimum requirements for a test class are the following:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Минимальные требования к тестовому классу следующие:</sentenceText></span></p><ul><li><p><span id="mt48" class="sentence" data-guid="cd0b7f53f15723715211893d3aaeb14d" data-source="The &lt;span class=&quot;code&quot;&gt;[TestClass]&lt;/span&gt; attribute is required in the Microsoft unit testing framework for managed code for any class that contains unit test methods that you want to run in Test Explorer." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Атрибут <span class="code" xmlns="http://www.w3.org/1999/xhtml">[TestClass]</span> является обязательным для платформы модульных тестов Microsoft для управляемого кода в любом классе, содержащем методы модульных тестов, которые необходимо выполнить в обозревателе тестов.</sentenceText></span></p></li><li><p><span id="mt49" class="sentence" data-guid="ed1c98836818546d31f17ac89ecd4e2e" data-source="Each test method that you want Test Explorer to run must have the &lt;span class=&quot;code&quot;&gt;[TestMethod]&lt;/span&gt;attribute. " xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Каждый метод теста, который требуется выполнять с помощью обозревателя тестов, должен иметь атрибут <span>[TestMethod]</span>.</sentenceText>
+</sentenceText></span></p></li></ul><p><span id="mt50" class="sentence" data-guid="13be01729d90b016b95e5c17cdf55645" data-source="You can have other classes in a unit test project that do not have the &lt;span class=&quot;code&quot;&gt;[TestClass]&lt;/span&gt; attribute, and you can have other methods in test classes that do not have the &lt;span class=&quot;code&quot;&gt;[TestMethod]&lt;/span&gt; attribute." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Кроме того, в проекте модульного теста могут быть классы без атрибута <span>[TestClass], а в </span>тестовых классах могут быть методы без атрибута <span>[TestMethod]</span>.</sentenceText>
+</sentenceText></span>  <span id="mt51" class="sentence" data-guid="f8da1586304a87593c181c19b96680c4" data-source="You can use these other classes and methods in your test methods." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Можно использовать эти другие классы и методы в методах теста.</sentenceText></span>  </p></div></div>
+      </div>
+      <a id="BKMK_Create_the_first_test_method">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Создание первого тестового метода</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle4">
+            
+          </a>
+          <p>
+            <span id="mt52" class="sentence" data-guid="55f46f5942b0e82942b4729e7d93b2f2" data-source="In this procedure, we will write unit test methods to verify the behavior of the &lt;span class=&quot;code&quot;&gt;Debit&lt;/span&gt; method of the &lt;span class=&quot;code&quot;&gt;BankAccount&lt;/span&gt; class." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">В этой процедуре мы напишем методы модульного теста для проверки поведения метода <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit</span> класса <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccount</span>.</sentenceText>
+            </span>  <span id="mt53" class="sentence" data-guid="bc02aafe63492628104ef0ac9e042702" data-source="The method is listed above." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Этот метод приведен выше.</sentenceText></span>  </p>
+          <p>
+            <span id="mt54" class="sentence" data-guid="4bdba01f50ae585d3d74c46b716109c4" data-source="By analyzing the method under test, we determine that there are at least three behaviors that need to be checked:" xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Путем анализа тестируемого метода мы определили, что необходимо проверить по меньшей мере три поведения.</sentenceText>
+            </span>
+          </p>
+          <ol>
+            <li>
+              <p>
+                <span id="mt55" class="sentence" data-guid="17907fd122263f0601171c6366c63b45" data-source="The method throws an &lt;span&gt;&lt;span class=&quot;nolink&quot;&gt;[ArgumentOutOfRangeException]&lt;/span&gt;&lt;/span&gt; if the credit amount is greater than the balance." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод создает исключение <span xmlns="http://www.w3.org/1999/xhtml"><span class="nolink">[ArgumentOutOfRangeException]</span></span>, если сумма кредита превышает баланс.</sentenceText>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span id="mt56" class="sentence" data-guid="88edecaad55201ad033e6e797d5d557e" data-source="It also throws &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; if the credit amount is less than zero." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Он также создает <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>, если размер кредита меньше нуля.</sentenceText>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span id="mt57" class="sentence" data-guid="49bd60772ccfc9e8418da576fbc7f8aa" data-source="If the checks in 1.) and 2.) are satisfied, the method subtracts the amount from the account balance." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Если проверка пунктов 1.) и 2.) проходит успешно, то метод вычитает сумму из баланса счета.</sentenceText>
+                </span>
+              </p>
+            </li>
+          </ol>
+          <p>
+            <span id="mt58" class="sentence" data-guid="2ae88d7ed85de3e2d012510a33f55773" data-source="In our first test, we verify that that a valid amount (one that is less than the account balance and that is greater than zero) withdraws the correct amount from the account." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">В первом тесте проверим, что при допустимом размере кредита (со значением, меньшим баланса счета и большим нуля) со счета снимается нужная сумма.</sentenceText>
+            </span>
+          </p>
+          <h3 class="procedureSubHeading">Создание метода теста</h3>
+          <div class="subSection">
+            <ol>
+              <li>
+                <p>
+                  <span id="mt59" class="sentence" data-guid="51e30f0dcbf6a719f608bccbe86be12b" data-source="Add a using &lt;span class=&quot;code&quot;&gt;BankAccountNS;&lt;/span&gt; statement to the BankAccountTests.cs file." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Добавьте инструкцию using <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccountNS;</span> в файл BankAccountTests.cs.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt60" class="sentence" data-guid="fa53d6c7274ab37a8b5fc0893e6e7fbb" data-source="Add the following method to that &lt;span class=&quot;code&quot;&gt;BankAccountTests&lt;/span&gt; class:" xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Добавьте следующий метод в этот класс <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccountTests</span>:</sentenceText>
+                  </span>
+                </p>
+<div id="code-snippet-4" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_0a0afa1f-89aa-4220-8610-05586f72fe4c');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_0a0afa1f-89aa-4220-8610-05586f72fe4c" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">// unit test code</span>
+[TestMethod]
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Debit_WithValidAmount_UpdatesBalance()
+{
+    <span style="color:Green;">// arrange</span>
+    <span style="color:Blue;">double</span> beginningBalance = 11.99;
+    <span style="color:Blue;">double</span> debitAmount = 4.55;
+    <span style="color:Blue;">double</span> expected = 7.44;
+    BankAccount account = <span style="color:Blue;">new</span> BankAccount(<span style="color:#A31515;">"Mr. Bryan Walton"</span>, beginningBalance);
+
+    <span style="color:Green;">// act</span>
+    account.Debit(debitAmount);
+
+    <span style="color:Green;">// assert</span>
+    <span style="color:Blue;">double</span> actual = account.Balance;
+    Assert.AreEqual(expected, actual, 0.001, <span style="color:#A31515;">"Account not debited correctly"</span>);
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+</li>
+            </ol>
+            <p>
+              <span id="mt61" class="sentence" data-guid="e40ddee5fb5f74843db5de49b6c739ca" data-source="The method is rather simple." xml:space="preserve">
+                <sentenceText xmlns="http://www.w3.org/1999/xhtml">Этот метод достаточно прост.</sentenceText>
+              </span>  <span id="mt62" class="sentence" data-guid="8cace1b305de3b704c93fc7ce4df4f66" data-source="We set up a new &lt;span class=&quot;code&quot;&gt;BankAccount&lt;/span&gt; object with a beginning balance and then withdraw a valid amount." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Мы создаем новый объект <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccount</span> с начальным балансом, а затем снимаем допустимое значение.</sentenceText></span>  <span id="mt63" class="sentence" data-guid="8c16d17d81c90e9e6ee1fb9c8ff27afe" data-source="We use the Microsoft unit test framework for managed code &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;AreEqual&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; method to verify that the ending balance is what we expect." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Используем платформу модульных тестов Microsoft для метода <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/microsoft.visualstudio.testtools.unittesting.assert.areequal.aspx">AreEqual</a></span> управляемого кода, чтобы проверить соответствие конечного баланса ожидаемому.</sentenceText></span>  </p>
+          </div>
+          <a id="BKMK_Test_method_requirements">
+            
+          </a>
+          <h3 class="subHeading">
+            <span>
+              
+              <img id="collapse_all" alt="ms182532.collapse_all(ru-ru,VS.120).gif" src="http://i.msdn.microsoft.com/dynimg/IC249240.gif" title="ms182532.collapse_all(ru-ru,VS.120).gif" xmlns="" />Требования к методу теста</span>
+          </h3>
+          <div class="subsection" id="collapseableSection6" expanded="true">
+            <p>
+              <span id="mt64" class="sentence" data-guid="a69e4fbba1b2040ffec61e3a4a78e46f" data-source="A test method must meet the following requirements:" xml:space="preserve">
+                <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод теста должен удовлетворять следующим требованиям:</sentenceText>
+              </span>
+            </p>
+            <ul>
+              <li>
+                <p>
+                  <span id="mt65" class="sentence" data-guid="3486e4f86b2f8e36144fb058c1f22c71" data-source="The method must be decorated with the &lt;span class=&quot;code&quot;&gt;[TestMethod]&lt;/span&gt; attribute." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод должен быть отмечен атрибутом <span class="code" xmlns="http://www.w3.org/1999/xhtml">[TestMethod]</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt66" class="sentence" data-guid="01a2111c4f2f8971323c5ecb4b2d386d" data-source="The method must return &lt;span class=&quot;code&quot;&gt;void&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод должен вернуть <span class="code" xmlns="http://www.w3.org/1999/xhtml">void</span>.</sentenceText>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt67" class="sentence" data-guid="18b818bcef9deb731a3cac51632f8e66" data-source="The method cannot have parameters." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод не должен иметь параметров.</sentenceText>
+                  </span>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <a id="BKMK_Build_and_run_the_test">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Сборка и запуск теста</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle6">
+            
+          </a>
+          <h3 class="procedureSubHeading">Сборка и запуск теста</h3>
+          <div class="subSection">
+            <ol>
+              <li>
+                <p>
+                  <span id="mt68" class="sentence" data-guid="9248f9d9b3909062c5d7cdb0556c765b" data-source="On the &lt;span class=&quot;label&quot;&gt;Build&lt;/span&gt; menu, choose &lt;span class=&quot;label&quot;&gt;Build Solution&lt;/span&gt;." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В меню <span class="label" xmlns="http://www.w3.org/1999/xhtml">Построение</span> выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Построить решение</span>.</sentenceText>
+                  </span>
+                </p>
+                <p>
+                  <span id="mt69" class="sentence" data-guid="3b9b247e495bf675917c47c6a985a9e4" data-source="If there are no errors, the UnitTestExplorer window appears with &lt;span class=&quot;label&quot;&gt;Debit_WithValidAmount_UpdatesBalance&lt;/span&gt; listed in the &lt;span class=&quot;label&quot;&gt;Not Run Tests&lt;/span&gt; group." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">При отсутствии ошибок появляется окно UnitTestExplorer с указанием <span>Debit_WithValidAmount_UpdatesBalance</span> в списке <span>Незапущенные тесты</span>.</sentenceText>
+</sentenceText>
+                  </span>  <span id="mt70" class="sentence" data-guid="9649801919cd508ef84c6d8a68db45fe" data-source="If Test Explorer does not appear after a successful build, choose &lt;span class=&quot;label&quot;&gt;Test&lt;/span&gt; on the menu, then choose &lt;span class=&quot;label&quot;&gt;Windows&lt;/span&gt;, and then choose &lt;span class=&quot;label&quot;&gt; Test Explorer&lt;/span&gt;." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Если после успешной сборки обозреватель тестов не появляется, выберите в меню <span class="label" xmlns="http://www.w3.org/1999/xhtml">Тестирование</span>, затем <span class="label" xmlns="http://www.w3.org/1999/xhtml">Окна</span>, а затем <span class="label" xmlns="http://www.w3.org/1999/xhtml"> Обозреватель тестов</span>.</sentenceText></span>  </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt71" class="sentence" data-guid="163f9366d481ae965586d717a49bd48b" data-source="Choose &lt;span class=&quot;label&quot;&gt;Run All&lt;/span&gt; to run the test." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">Выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Запустить все</span>, чтобы выполнить тест.</sentenceText>
+                  </span>  <span id="mt72" class="sentence" data-guid="3bb75255ceaadbc6f677f68f4a78faef" data-source="As the test is running the status bar at the top of the window is animated." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Во время выполнения теста в верхней части окна отображается анимированная строка состояния.</sentenceText></span>  <span id="mt73" class="sentence" data-guid="3f519f36d8e4f8c27882fd0776d935d3" data-source="At the end of the test run, the bar turns green if all the test methods pass, or red if any of the tests fail." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">По завершении тестового запуска строка состояния становится зеленой, если все методы теста успешно пройдены, или красной, если какие-либо из тестов не пройдены.</sentenceText></span>  </p>
+              </li>
+              <li>
+                <p>
+                  <span id="mt74" class="sentence" data-guid="ab8f8e2bfc308b22ee11506219effaac" data-source="In this case, the test does fail." xml:space="preserve">
+                    <sentenceText xmlns="http://www.w3.org/1999/xhtml">В данном случае тест пройден не будет.</sentenceText>
+                  </span>  <span id="mt75" class="sentence" data-guid="a34b67cd033d461e82ae28b90eb320cc" data-source="The test method is moved to the &lt;span class=&quot;label&quot;&gt;Failed Tests&lt;/span&gt;. group." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод теста будет перемещен в группу <span class="label" xmlns="http://www.w3.org/1999/xhtml">Неудачные тесты</span>.</sentenceText></span>  <span id="mt76" class="sentence" data-guid="176f905537d9d03f85d4ca860d28cca9" data-source="Select the method in Test Explorer to view the details at the bottom of the window." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Выберите этот метод в обозревателе тестов для просмотра сведений в нижней части окна.</sentenceText></span>  </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <a id="BKMK_Fix_your_code_and_rerun_your_tests">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Исправление кода и повторный запуск тестов</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle7">
+            
+          </a>
+          <p>
+            <span class="label">Анализ результатов теста</span>
+          </p>
+          <p>
+            <span id="mt77" class="sentence" data-guid="7f294d519877df4aa8bd8a32db4a423e" data-source="The test result contains a message that describes the failure." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Результат теста содержит сообщение, описывающее возникшую ошибку.</sentenceText>
+            </span>  <span id="mt78" class="sentence" data-guid="5f0e52c87ea698bbe267664ab9812c3b" data-source="For the &lt;span class=&quot;code&quot;&gt;AreEquals&lt;/span&gt; method, message displays you what was expected (the (&lt;span class=&quot;label&quot;&gt;Expected&amp;lt;XXX&amp;gt;&lt;/span&gt;parameter) and what was actually received (the &lt;span class=&quot;label&quot;&gt;Actual&amp;lt;YYY&amp;gt;&lt;/span&gt; parameter)." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Для метода <span class="code" xmlns="http://www.w3.org/1999/xhtml">AreEquals</span> сообщение отражает ожидаемый результат (параметр <span class="label" xmlns="http://www.w3.org/1999/xhtml">Expected &lt;XXX&gt;</span>) и фактически полученный (параметр <span class="label" xmlns="http://www.w3.org/1999/xhtml">Actual&lt;YYY&gt;</span>).</sentenceText></span>  <span id="mt79" class="sentence" data-guid="11701ad3097f3281039e37aa00b0ebc1" data-source="We were expecting the balance to decline from the beginning balance, but instead it has increased by the amount of the withdrawal." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Ожидалось, что баланс уменьшится относительно начального баланса, но вместо этого произошло его увеличение на сумму списания.</sentenceText></span>  </p>
+          <p>
+            <span id="mt80" class="sentence" data-guid="6aabba8191389d2034fae0b3f2fd0bed" data-source="A reexamination of the Debit code shows that the unit test has succeeded in finding a bug." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Повторная проверка кода "Дебит" показывает, что модульный тест позволил успешно найти ошибку.</sentenceText>
+            </span>  <span id="mt81" class="sentence" data-guid="de2b762ed0ffe54fe3488dc2013807e0" data-source="The amount of the withdrawal is added to the account balance when it should be subtracted." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Сумма списания добавляется на баланс счета, а не вычитается.</sentenceText></span>  </p>
+          <p>
+            <span class="label">Исправление ошибки</span>
+          </p>
+          <p>
+            <span id="mt82" class="sentence" data-guid="678c6b827c8814ea54dd25bcfa6a8c3b" data-source="To correct the error, simply replace the line" xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Для исправления ошибки просто замените строку</sentenceText>
+            </span>
+          </p>
+<div id="code-snippet-5" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_d2312ff4-a045-4bdc-8b7e-2886b3459ae6');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_d2312ff4-a045-4bdc-8b7e-2886b3459ae6" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+m_balance += amount;
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt83" class="sentence" data-guid="23a58bf9274bedb19375e527a0744fa9" data-source="with" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">на</sentenceText>
+</sentenceText></span></p>
+<div id="code-snippet-6" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_7e5ca2da-b951-4874-8190-d50cd4550e7e');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_7e5ca2da-b951-4874-8190-d50cd4550e7e" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+m_balance -= amount;
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span class="label">Повторный запуск теста</span></p><p><span id="mt84" class="sentence" data-guid="665ef2a69a2f5b76d48f3aa7f76e5496" data-source="In Test Explorer, choose &lt;span class=&quot;label&quot;&gt;Run All&lt;/span&gt; to rerun the test." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В обозревателе тестов выберите <span class="label" xmlns="http://www.w3.org/1999/xhtml">Запустить все</span>, чтобы запустить тест повторно.</sentenceText></span>  <span id="mt85" class="sentence" data-guid="0ed8258c2def8867d3357f32515e2977" data-source="The red/green bar turns green, and the test is moved to the &lt;span class=&quot;label&quot;&gt;Passed Tests&lt;/span&gt; group." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Красно-зеленая строка состояния станет зеленой, и тест будет перемещен в группу <span class="label" xmlns="http://www.w3.org/1999/xhtml">Пройденные тесты</span>.</sentenceText></span>  </p></div>
+      </div>
+      <a id="BKMK_Use_unit_tests_to_improve_your_code">
+        
+      </a>
+      <div>
+        <h2 class="LW_CollapsibleArea_TitleDiv">
+          <div>
+            <a href="javascript:void(0)" class="LW_CollapsibleArea_TitleAhref" title="Свернуть" role="button">
+              <span class="cl_CollapsibleArea_expanding LW_CollapsibleArea_Img"></span>
+              <span class="LW_CollapsibleArea_Title">Использование модульных тестов для улучшения кода</span>
+            </a>
+            <div class="LW_CollapsibleArea_HrDiv">
+              <hr class="LW_CollapsibleArea_Hr" />
+            </div>
+          </div>
+        </h2>
+        <div class="sectionblock">
+          <a id="sectionToggle8">
+            
+          </a>
+          <p>
+            <span id="mt86" class="sentence" data-guid="bb1b5a7e9f7f0009e5387432c02cb401" data-source="This section describes how an iterative process of analysis, unit test development, and refactoring can help you make your production code more robust and effective." xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">В этом разделе рассматривается, как последовательный процесс анализа, разработки модульных тестов и рефакторинга может помочь сделать рабочий код более надежным и эффективным.</sentenceText>
+            </span>
+          </p>
+          <p>
+            <span class="label">Анализ проблем</span>
+          </p>
+          <p>
+            <span id="mt87" class="sentence" data-guid="45ee34927a21b6d291ce2d5db9e5f4aa" data-source="After creating a test method to confirm that a valid amount is correctly deducted in the &lt;span class=&quot;code&quot;&gt;Debit&lt;/span&gt; method, we can turn to remaining cases in our original analysis: " xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">После создания тестового метода, проверяющего корректное списывание нужной суммы в методе <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit</span>, вернемся к остальным вариантам исходного анализа. </sentenceText>
+            </span>
+          </p>
+          <ol>
+            <li>
+              <p>
+                <span id="mt88" class="sentence" data-guid="ba537ea8ddf04d829eb349f2bad041dc" data-source="The method throws an &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; if the credit amount is greater than the balance." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод создает исключение <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>, если сумма кредита превышает баланс.</sentenceText>
+                </span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span id="mt89" class="sentence" data-guid="88edecaad55201ad033e6e797d5d557e" data-source="It also throws &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; if the credit amount is less than zero." xml:space="preserve">
+                  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Он также создает <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>, если размер кредита меньше нуля.</sentenceText>
+                </span>
+              </p>
+            </li>
+          </ol>
+          <p>
+            <span class="label">Создание методов теста</span>
+          </p>
+          <p>
+            <span id="mt90" class="sentence" data-guid="4c1b04bb3b72b2b90ab15480f63ebbca" data-source="A first attempt at creating a test method to address these issues seems promising:" xml:space="preserve">
+              <sentenceText xmlns="http://www.w3.org/1999/xhtml">Первая попытка создания тестового метода для решения этих проблем кажется перспективной:</sentenceText>
+            </span>
+          </p>
+<div id="code-snippet-7" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_53423c38-4d3f-442d-bf16-583c41d96937');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_53423c38-4d3f-442d-bf16-583c41d96937" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">//unit test method</span>
+[TestMethod]
+[ExpectedException(<span style="color:Blue;">typeof</span>(ArgumentOutOfRangeException))]
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
+{
+    <span style="color:Green;">// arrange</span>
+    <span style="color:Blue;">double</span> beginningBalance = 11.99;
+    <span style="color:Blue;">double</span> debitAmount = -100.00;
+    BankAccount account = <span style="color:Blue;">new</span> BankAccount(<span style="color:#A31515;">"Mr. Bryan Walton"</span>, beginningBalance);
+
+    <span style="color:Green;">// act</span>
+    account.Debit(debitAmount);
+
+    <span style="color:Green;">// assert is handled by ExpectedException</span>
+}
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt91" class="sentence" data-guid="d943c2d4998c582b3c801b53f38460a7" data-source="We use the &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;ExpectedExceptionAttribute&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; attribute to assert that the right exception has been thrown." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Мы используем атрибут <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/microsoft.visualstudio.testtools.unittesting.expectedexceptionattribute.aspx">ExpectedExceptionAttribute</a></span> для подтверждения правильности созданного исключения.</sentenceText></span>  <span id="mt92" class="sentence" data-guid="dc22c984e3d4ac0b3532e39b5dc58637" data-source="The attribute causes the test to fail unless an &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; is thrown." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Данный атрибут приводит к тому, что тест не будет пройден, если не возникнет исключения <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>.</sentenceText></span>  <span id="mt93" class="sentence" data-guid="c707989516d88d5c466a9947c5f1fb0f" data-source="Running the test with both positive and negative &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt; values and then temporarily modifying the method under test to throw a generic &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;ApplicationException&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; when the amount is less than zero demonstrates that test behaves correctly." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Запуск теста как с положительными, так и с отрицательными значениями <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span>, а также временное изменение тестируемого метода для возвращения универсального исключения <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/system.applicationexception.aspx">ApplicationException</a></span> при размере списания меньше нуля показывает, что тест работает правильно.</sentenceText></span>  <span id="mt94" class="sentence" data-guid="a9468b57e86287329bb6652760a5aeab" data-source="To test the case when the amount withdrawn is greater than the balance, all we need to do is:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Чтобы проверить случай, когда размер списания превышает баланс, необходимо:</sentenceText></span>  </p><ol><li><p><span id="mt95" class="sentence" data-guid="c16e2ec6dba80433736f0d80669eee1b" data-source="Create a new test method named &lt;span class=&quot;code&quot;&gt;Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange&lt;/span&gt;." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Создать новый метод теста с именем <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange</span>.</sentenceText></span></p></li><li><p><span id="mt96" class="sentence" data-guid="d15319d0d624623d26f890b7037cc568" data-source="Copy the method body from &lt;span class=&quot;code&quot;&gt;Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange&lt;/span&gt; to the new method." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Скопировать тело метода из <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange</span> в новый метод.</sentenceText></span></p></li><li><p><span id="mt97" class="sentence" data-guid="ea1ad8fc9a6e3fd48e0fd84b961a6ad9" data-source="Set the &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt; to a number greater than the balance." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Присвоить  <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span> значение, превышающее баланс.</sentenceText></span></p></li></ol><p><span class="label">Запуск тестов</span></p><p><span id="mt98" class="sentence" data-guid="31a982e62021c603741396563f0a36c5" data-source="Running the two methods with different values for &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt; demonstrates that the tests adequately handle our remaining cases." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Запуск двух методов с разными значениями для <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span> показывает, что тесты корректно обрабатывают оставшиеся варианты.</sentenceText></span>  <span id="mt99" class="sentence" data-guid="a16080488b9f4ed8ef1005c05ba796cc" data-source="Running all three tests confirm that all cases in our original analysis are correctly covered." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Запуск всех трех тестов позволяет убедиться в том, что все варианты в исходном анализе правильно охвачены тестами.</sentenceText></span>  </p><p><span class="label">Продолжение анализа</span></p><p><span id="mt100" class="sentence" data-guid="c25c1db8cc6052fff94920bef0182f1e" data-source="However, the last two test methods are also somewhat troubling." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Однако последние два тестовых метода вызывают некоторое беспокойство.</sentenceText></span>  <span id="mt101" class="sentence" data-guid="18c3a97b6d86b2b9ed76a1ee41407fc8" data-source="We cannot be certain which condition in the code under test throws when either test runs." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Невозможно точно определить, какое условие тестируемого кода из всех тестовых запусков приводит к возникновению исключения.</sentenceText></span>  <span id="mt102" class="sentence" data-guid="2ad87f83a8b9a759fa27aba24d75d3ab" data-source="Some way of differentiating the two conditions would be helpful." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Желательно иметь способ различения этих двух условий.</sentenceText></span>  <span id="mt103" class="sentence" data-guid="989f721a3b31f96a51f0f4e8a6d0461a" data-source="As we think about the problem more, it becomes apparent that knowing which condition was violated would increase our confidence in the tests." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">При дальнейшем анализе данной проблемы становится очевидным, что наличие сведений о нарушенном условии повышает надежность тестов.</sentenceText></span>  <span id="mt104" class="sentence" data-guid="f9d5f6a9744bba1246bcad855b7e32f9" data-source="This information would also very likely be helpful to the production mechanism that handles the exception when it is thrown by the method under test." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Также эти сведения, вероятно, могут быть полезны для создания рабочего механизма обработки ошибок при их возникновении в тестируемом методе.</sentenceText></span>  <span id="mt105" class="sentence" data-guid="d0508429b552a834286a54925484b508" data-source="Generating more information when the method throws would assist all concerned, but the &lt;span class=&quot;code&quot;&gt;ExpectedException&lt;/span&gt; attribute cannot supply this information.." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Получение дополнительной информации при создании методом исключения позволило бы установить данную связь, но атрибут <span class="code" xmlns="http://www.w3.org/1999/xhtml">ExpectedException</span> не предоставляет эту информацию.</sentenceText></span>  </p><p><span id="mt106" class="sentence" data-guid="2e08bb05769a80b57947e74d313cba01" data-source="Looking at the method under test again, we see both conditional statements use an &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; constructor that takes name of the argument as a parameter: " xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Еще раз посмотрев на тестируемый метод, можно заметить, что оба условных оператора используют конструктор <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>, который получает имя аргумента в качестве параметра: </sentenceText></span></p>
+<div id="code-snippet-8" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_d8f27874-9eff-44d9-8fa0-f35ce70861b0');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_d8f27874-9eff-44d9-8fa0-f35ce70861b0" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Blue;">throw</span> <span style="color:Blue;">new</span> ArgumentOutOfRangeException(<span style="color:#A31515;">"amount"</span>);
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt107" class="sentence" data-guid="668ae90b8e09862d9e79d49b12062afc" data-source="From a search of the MSDN Library, we discover that a constructor exists that reports far richer information." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Поиск в библиотеке MSDN позволяет обнаружить существование конструктора, сообщающего более детальную информацию.</sentenceText></span>  <span id="mt108" class="sentence" data-guid="2b90ca4f96c00fed7f86024252abb6ff" data-source="&lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;ArgumentOutOfRangeException&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;code&quot;&gt;(String, Object, String)&lt;/span&gt; includes the name of the argument, the argument value, and a user-defined message." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <span xmlns="http://www.w3.org/1999/xhtml">
+    <span class="unresolvedLink">ArgumentOutOfRangeException</span>
+  </span>
+  <span class="code" xmlns="http://www.w3.org/1999/xhtml">(String, Object, String)</span> включает имя аргумента, значения аргумента и определяемое пользователем сообщение.</sentenceText></span>  <span id="mt109" class="sentence" data-guid="19fad08a0032c803731447691021dad6" data-source="We can refactor the method under test to use this constructor." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Мы можем выполнить рефакторинг тестируемого метода для использования данного конструктора.</sentenceText></span>  <span id="mt110" class="sentence" data-guid="ea1a5147bf6bf7efdd38fc13b2b3b17d" data-source="Even better, we can use publicly available type members to specify the errors." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Более того, можно использовать открытые для общего доступа члены типа для указания ошибок.</sentenceText></span>  </p><p><span class="label">Рефакторинг тестируемого кода</span></p><p><span id="mt111" class="sentence" data-guid="d0b174e3179565346519ab0126e5f564" data-source="We first define two constants for the error messages at class scope:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Сначала определим две константы для сообщений об ошибках в области видимости класса:</sentenceText></span></p>
+<div id="code-snippet-9" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_be54eef2-e7e1-41cd-a3bb-90096638e94f');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_be54eef2-e7e1-41cd-a3bb-90096638e94f" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">// class under test</span>
+<span style="color:Blue;">public</span> <span style="color:Blue;">const</span> <span style="color:Blue;">string</span> DebitAmountExceedsBalanceMessage = <span style="color:#A31515;">"Debit amount exceeds balance"</span>;
+<span style="color:Blue;">public</span> <span style="color:Blue;">const</span> <span style="color:Blue;">string</span> DebitAmountLessThanZeroMessage = <span style="color:#A31515;">"Debit amount less than zero"</span>;
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt112" class="sentence" data-guid="6f854c3173a37e229fe61b1732f53e54" data-source="We then modify the two conditional statements in the &lt;span class=&quot;code&quot;&gt;Debit&lt;/span&gt; method:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Изменим два условных оператора в методе <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit</span>:</sentenceText></span></p>
+<div id="code-snippet-10" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_d7e2460d-12e5-462d-b47f-fa63dd978c6f');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_d7e2460d-12e5-462d-b47f-fa63dd978c6f" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+<span style="color:Green;">// method under test</span>
+<span style="color:Green;">// ...</span>
+    <span style="color:Blue;">if</span> (amount &gt; m_balance)
+    {
+        <span style="color:Blue;">throw</span> <span style="color:Blue;">new</span> ArgumentOutOfRangeException(<span style="color:#A31515;">"amount"</span>, amount, DebitAmountExceedsBalanceMessage);
+    }
+
+    <span style="color:Blue;">if</span> (amount &lt; 0)
+    {
+        <span style="color:Blue;">throw</span> <span style="color:Blue;">new</span> ArgumentOutOfRangeException(<span style="color:#A31515;">"amount"</span>, amount, DebitAmountLessThanZeroMessage);
+    }
+<span style="color:Green;">// ...</span>
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span class="label">Рефакторинг тестовых методов</span></p><p><span id="mt113" class="sentence" data-guid="a521e82753b18032133b114d7fb900dc" data-source="In our test method, we first remove the &lt;span class=&quot;code&quot;&gt;ExpectedException&lt;/span&gt; attribute." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В данном тестовом методе сначала удалим атрибут <span class="code" xmlns="http://www.w3.org/1999/xhtml">ExpectedException</span>.</sentenceText></span>  <span id="mt114" class="sentence" data-guid="53d382822c63a43fb78e818c1e12c822" data-source="In its place, we catch the thrown exception and verify that it was thrown in the correct condition statement." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Вместо этого перехватываем возвращаемое исключение и проверяем, что оно было создано в правильном условном операторе.</sentenceText></span>  <span id="mt115" class="sentence" data-guid="b852faa4195ac34ca0f477b1b489ea30" data-source="However, we must now decide between two options to verify our remaining conditions." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Однако теперь необходимо выбрать между двумя возможными вариантами для проверки оставшихся условий.</sentenceText></span>  <span id="mt116" class="sentence" data-guid="17fcbecd3815176f9cfa196681f4c812" data-source="For example in the &lt;span class=&quot;code&quot;&gt;Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange&lt;/span&gt; method, we can take one of the following actions:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Например, в методе <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange</span> можно выполнить одно из следующих действий:</sentenceText></span>  </p><ul><li><p><span id="mt117" class="sentence" data-guid="e932e3ae4b4e35ccbf9df14b9b702488" data-source="Assert that the &lt;span class=&quot;code&quot;&gt;ActualValue&lt;/span&gt; property of the exception (the second parameter of the &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRangeException&lt;/span&gt; constructor) is greater than the beginning balance." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Проверить, что свойство <span class="code" xmlns="http://www.w3.org/1999/xhtml">ActualValue</span> исключения (второй параметр конструктора <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRangeException</span>) больше начального баланса.</sentenceText></span>  <span id="mt118" class="sentence" data-guid="abc3a24e4922443f7a98a2ab41a01e58" data-source="This option requires that we test the &lt;span class=&quot;code&quot;&gt;ActualValue&lt;/span&gt; property of the exception against the &lt;span class=&quot;code&quot;&gt;beginningBalance&lt;/span&gt; variable of the test method, and also requires then verify that the &lt;span class=&quot;code&quot;&gt;ActualValue&lt;/span&gt; is greater than zero." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В данном случае необходимо сравнить свойство <span class="code" xmlns="http://www.w3.org/1999/xhtml">ActualValue</span> исключения со значением переменной <span class="code" xmlns="http://www.w3.org/1999/xhtml">beginningBalance</span> метода теста, а также проверить, что значение <span class="code" xmlns="http://www.w3.org/1999/xhtml">ActualValue</span> больше нуля.</sentenceText></span>  </p></li><li><p><span id="mt119" class="sentence" data-guid="3dbf155a7649a83882948ab8c09901ac" data-source="Assert that the message (the third parameter of the constructor) includes the &lt;span class=&quot;code&quot;&gt;DebitAmountExceedsBalanceMessage&lt;/span&gt; defined in the &lt;span class=&quot;code&quot;&gt;BankAccount&lt;/span&gt; class. " xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Проверить, что сообщение (третий параметр конструктора) включает <span class="code" xmlns="http://www.w3.org/1999/xhtml">DebitAmountExceedsBalanceMessage</span>, определенное в классе <span class="code" xmlns="http://www.w3.org/1999/xhtml">BankAccount</span>. </sentenceText></span></p></li></ul><p><span id="mt120" class="sentence" data-guid="f388348dff153e21e91c3892c4834125" data-source="The &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;StringAssert&lt;span class=&quot;mtpsTagOuterHtml&quot;  xmlns=&quot;&quot;&gt;&lt;span&gt;.&lt;/span&gt;&lt;/span&gt;Contains&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; method in the Microsoft unit test framework enables us to verify the second option without the calculations that are required of the first option." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/microsoft.visualstudio.testtools.unittesting.stringassert.contains.aspx">StringAssert<span xmlns="">.</span>Contains</a></span> платформы модульных тестов Microsoft позволяет проверить второй параметр без вычислений, необходимых в первом случае.</sentenceText></span></p><p><span id="mt121" class="sentence" data-guid="06d914a513d2778fd1b9c604dabe6cfd" data-source="A second attempt at revising &lt;span class=&quot;code&quot;&gt;Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange&lt;/span&gt; might look like:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Вторая попытка корректировки <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange</span> может выглядеть следующим образом:</sentenceText></span></p>
+<div id="code-snippet-11" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_12f91eb6-a364-44e3-8b8c-cef3ee93bc42');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_12f91eb6-a364-44e3-8b8c-cef3ee93bc42" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+[TestMethod]
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Debit_WhenAmountIsGreaterThanBalance_ShouldThrowArgumentOutOfRange()
+{
+    <span style="color:Green;">// arrange</span>
+    <span style="color:Blue;">double</span> beginningBalance = 11.99;
+    <span style="color:Blue;">double</span> debitAmount = 20.0;
+    BankAccount account = <span style="color:Blue;">new</span> BankAccount(<span style="color:#A31515;">"Mr. Bryan Walton"</span>, beginningBalance);\
+
+    <span style="color:Green;">// act</span>
+    <span style="color:Blue;">try</span>
+    {
+        account.Debit(debitAmount);
+    }
+    <span style="color:Blue;">catch</span> (ArgumentOutOfRangeException e)
+    {
+        <span style="color:Green;">// assert</span>
+        StringAssert.Contains(e.Message, BankAccount. DebitAmountExceedsBalanceMessage);
+    }
+}
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span class="label">Повторное тестирование, переписывание и анализ</span></p><p><span id="mt122" class="sentence" data-guid="6cb810378b6b814d518884328a423a13" data-source="When we retest the test methods with different values, we encounter the following facts:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">При повторной проверке тестируемого метода с разными значениями получаем следующие факты:</sentenceText></span></p><ol><li><p><span id="mt123" class="sentence" data-guid="e1beeb0172228084c8c6bb17c9fdbee8" data-source="If we catch the correct error by using an &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt; that is greater than the balance, the &lt;span class=&quot;code&quot;&gt;Contains&lt;/span&gt; assert passes, the exception is ignored, and so the test method passes." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">При верном обнаружении ошибки в случае, если <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span> больше баланса, проверка утверждения <span class="code" xmlns="http://www.w3.org/1999/xhtml">Contains</span> проходит успешно, исключение игнорируется и метод теста завершается успешно.</sentenceText></span>  <span id="mt124" class="sentence" data-guid="a069242f3c8468adecd8feedcfc667fe" data-source="This is the behavior we want." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Это соответствует ожидаемому поведению.</sentenceText></span>  </p></li><li><p><span id="mt125" class="sentence" data-guid="478ea61f4eefb7d410649b1dc70e50f5" data-source="If we use an &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt;, the assert fails because the wrong error message is returned." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Если используется <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span>, то проверка утверждения завершается неудачей, так как возвращается неверное сообщение об ошибке.</sentenceText></span>  <span id="mt126" class="sentence" data-guid="73b74a1ad59cf7230c8c9f45dc2575f3" data-source="The assert also fails if we introduce a temporary &lt;span class=&quot;code&quot;&gt;ArgumentOutOfRange&lt;/span&gt; exception at another point in the method under test code path." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Проверка утверждения также завершается неудачей, если ввести временное исключение <span class="code" xmlns="http://www.w3.org/1999/xhtml">ArgumentOutOfRange</span> на другом шаге в коде тестируемого метода.</sentenceText></span>  <span id="mt127" class="sentence" data-guid="16d8f1695267dceffdc1cc080b7d4201" data-source="This too is good." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">
+  <sentenceText xmlns="http://www.w3.org/1999/xhtml">Это также хорошо.</sentenceText>
+</sentenceText></span>  </p></li><li><p><span id="mt128" class="sentence" data-guid="5a232eec0cd2f0d3deb9dd5960a1fae1" data-source="If the &lt;span class=&quot;code&quot;&gt;debitAmount&lt;/span&gt; value is valid (i.e., less than the balance but greater than zero, no exception is caught, so the assert is never caught." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Если значение <span class="code" xmlns="http://www.w3.org/1999/xhtml">debitAmount</span> допустимо (т.е. меньше баланса, но больше нуля), то исключение перехватывается, а утверждение никогда не сработает.</sentenceText></span>  <span id="mt129" class="sentence" data-guid="f572a5a71136976db6190e581314d6e2" data-source="The test method passes." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Метод теста проходит успешно.</sentenceText></span>  <span id="mt130" class="sentence" data-guid="3c7a8be4d43bf7286cc2aca1c05f82a4" data-source="This is not good, because we want the test method to fail if no exception is thrown." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Это не хорошо, поскольку метод теста должен был завершиться ошибкой в том случае, если исключение не создается.</sentenceText></span>  </p></li></ol><p><span id="mt131" class="sentence" data-guid="ed90f1b0080e3f4fc9e0783344eb6d06" data-source="The third fact is a bug in our test method." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Третьим фактом является ошибка в методе теста.</sentenceText></span>  <span id="mt132" class="sentence" data-guid="781f3f248f33628fe9c52ab646693438" data-source="To attempt to resolve the issue, we add a &lt;span&gt;&lt;span class=&quot;mtpsTagOuterHtml&quot; &gt;&lt;span&gt;Fail&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; assert at the end of the test method to handle the case where no exception is thrown." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Попытаемся разрешить проблему, добавив утверждение <span xmlns="http://www.w3.org/1999/xhtml"><a href="http://msdn.microsoft.com/ru-ru/library/microsoft.visualstudio.testtools.unittesting.assert.fail.aspx">Fail</a></span> в конце тестового метода для обработки случая, когда исключение не создается.</sentenceText></span>  </p><p><span id="mt133" class="sentence" data-guid="7dfea36fcbe8c19b117ce9d4395e7b3d" data-source="But retesting shows that the test now fails if the correct exception is caught." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Однако повторное тестирование показывает, что тест теперь оказывается непройденным при перехватывании верного исключения.</sentenceText></span>  <span id="mt134" class="sentence" data-guid="6ec3ad1109270dd267dd062f1dfa5b00" data-source="The catch statement resets the exception and the method continues to execute, failing at the new assert." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Оператор catch сбрасывает исключение и метод продолжает выполняться, приводя к ошибочному срабатыванию следующего утверждения.</sentenceText></span>  <span id="mt135" class="sentence" data-guid="c2eb9628a1df15ed90cdbcef8f870b84" data-source="To resolve the new problem, we add a &lt;span class=&quot;code&quot;&gt;return&lt;/span&gt; statement after the &lt;span class=&quot;code&quot;&gt;StringAssert&lt;/span&gt;." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Чтобы разрешить эту новую проблему, добавим оператор <span class="code" xmlns="http://www.w3.org/1999/xhtml">return</span> после <span class="code" xmlns="http://www.w3.org/1999/xhtml">StringAssert</span>.</sentenceText></span>  <span id="mt136" class="sentence" data-guid="8992fa861bd59a091198abd3929d2b82" data-source="Retesting confirms that we have fixed our problems." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Повторное тестирование подтверждает, что проблемы решены.</sentenceText></span>  <span id="mt137" class="sentence" data-guid="fd7679d3654dd4353b1ed95d4a2a7e1d" data-source="Our final version of the &lt;span class=&quot;code&quot;&gt;Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange&lt;/span&gt; looks like the following:" xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Наша окончательная версия <span class="code" xmlns="http://www.w3.org/1999/xhtml">Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange</span> выглядит следующим образом:</sentenceText></span>  </p>
+<div id="code-snippet-12" class="codeSnippetContainer" xmlns="">
+    <div class="codeSnippetContainerTabs">
+        <div class="codeSnippetContainerTabSingle" dir="ltr"><a>C#</a></div>
+    </div>
+    <div class="codeSnippetContainerCodeContainer">
+        <div class="codeSnippetToolBar">
+            <div class="codeSnippetToolBarText">
+                <a name="CodeSnippetCopyLink" style="display: none;" title="Копировать в буфер обмена." href="javascript:if (window.epx.codeSnippet)window.epx.codeSnippet.copyCode('CodeSnippetContainerCode_efe32ecc-1b37-4b17-817e-d137fda640ea');">Копировать</a>
+            </div>
+        </div>
+        <div id="CodeSnippetContainerCode_efe32ecc-1b37-4b17-817e-d137fda640ea" class="codeSnippetContainerCode" dir="ltr">
+            <div style="color:Black;"><pre>
+[TestMethod]
+<span style="color:Blue;">public</span> <span style="color:Blue;">void</span> Debit_WhenAmountIsGreaterThanBalance_ShouldThrowArgumentOutOfRange()
+{
+    <span style="color:Green;">// arrange</span>
+    <span style="color:Blue;">double</span> beginningBalance = 11.99;
+    <span style="color:Blue;">double</span> debitAmount = 20.0;
+    BankAccount account = <span style="color:Blue;">new</span> BankAccount(<span style="color:#A31515;">"Mr. Bryan Walton"</span>, beginningBalance);\
+
+    <span style="color:Green;">// act</span>
+    <span style="color:Blue;">try</span>
+    {
+        account.Debit(debitAmount);
+    }
+    <span style="color:Blue;">catch</span> (ArgumentOutOfRangeException e)
+    {
+        <span style="color:Green;">// assert</span>
+        StringAssert.Contains(e.Message, BankAccount. DebitAmountExceedsBalanceMessage);
+        <span style="color:Blue;">return</span>;
+    }
+    Assert.Fail(<span style="color:#A31515;">"No exception was thrown."</span>)
+}
+
+</pre></div>
+            
+        </div>
+    </div>
+</div>
+<p><span id="mt138" class="sentence" data-guid="5986235387a9ab78ef299900403a75cc" data-source="In this final section, the work that we did improving our test code led to more robust and informative test methods." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">В заключение скажем, что проведенная работа по улучшению тестируемого кода привела к созданию более надежных и информативных методов тестов.</sentenceText></span>  <span id="mt139" class="sentence" data-guid="b631cf174bd330fcbeb358ab084d8e35" data-source="But more importantly, the extra analysis also led to better code in our project under test." xml:space="preserve"><sentenceText xmlns="http://www.w3.org/1999/xhtml">Однако более существенно то, что дополнительный анализ позволил улучшить тестируемый код в данном проекте.</sentenceText></span>  </p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+<script id="CommentTemplate" type="text/x-jquery-tmpl">
+    <div class="communityContentAnnotation">
+        <a name="${Index}"></a>
+        <h3>
+            ${Title}
+        </h3>
+        <div class="communityContentAnnotationBody">
+            {{html Body}}
+        </div>
+        <div class="communityContentAnnotationInfo">
+            <div class="communityContentAnnotationAvatarContainer">
+                <a href="${UserAvatar.Href}" title="${UserAvatar.ToolTip}" class="communityContentAnnotationAvatar"><img src="${UserAvatar.ImageUrl}" alt="${UserAvatar.ImageAltText}" width="34" height="34" /></a>
+            </div>
+            <div class="communityContentAnnotationUserDateContainer">
+                <div class="communityContentAnnotationUserContainer">
+                    <a href="${UserAvatar.Href}">
+                        ${User}
+                    </a>
+                </div>
+                <div class="communityContentAnnotationDateContainer">
+                    <span>${Date}</span>
+                    
+                    {{if EditLink}}
+                        <span>
+                            <a href="${EditLink.Href}" title="${EditLink.ToolTip}" class="communityContentCommentEditLink">${EditLink.Title}</a>
+                        </span>
+                    {{/if}}
+
+                    {{if DeleteLink}}
+                        <span>
+                            <a href="${DeleteLink.Href}" title="${DeleteLink.ToolTip}" class="communityContentDeleteLink">${DeleteLink.Title}</a>
+                        </span>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<div class="communityContentContainer">
+    <div id="CommunityContentHeader" class="communityContentHeader">
+        <div class="communityContentHeaderTitleContainer">
+            <h2>Добавления сообщества</h2>
+                <a class="communityContentAddLink" href="http://msdn.microsoft.com/ru-ru/library/community/add/ms182532.aspx">
+                    <span class="communityContentAddButton" title="Add («Добавить»)">
+                        ДОБАВИТЬ
+                    </span>
+                </a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <div id="CommunityComments" data-url="/ru-ru/library/community/comments/ms182532.aspx"></div>
+</div>
+
+
+
+
+<div class="libraryMemberFilter">
+    <div class="filterContainer">
+        <span>Показ:</span>
+        <label>
+            <input type="checkbox" class="libraryFilterInherited" checked="checked" value="Inherit" />Унаследовано
+        </label>
+        <label>
+            <input type="checkbox" class="libraryFilterProtected" checked="checked" value="Protected" />Защищен
+        </label>
+    </div>
+</div>
+    
+<input type="hidden" id="libraryMemberFilterEmptyWarning" value="Для текущих настроек фильтра нет доступных членов." />
+
+
+ 
+</div>
+
+
+            </div>
+            <div class="clear"></div>
+
+            
+    
+<input name="__RequestVerificationToken" type="hidden" value="vVeGRPQITKfn2szmJfED7_asHQ-_2smwCzCVfgCpdKDvQKdEs2jF5d8z_r-mu3uERpxRmxOjArFpsERVxZkca3IF3yg1" />
+<input id="ratingSubmitUrl" type="hidden" value="http://msdn.microsoft.com/ru-ru/library/feedback/add/ms182532.aspx" />
+<input id="isTopicRated" type="hidden" value="false" />
+
+
+
+
+    
+
+    
+    <link type="text/css" rel="stylesheet" />
+    
+    <div id="ux-footer" class="" style="" dir="ltr">
+            
+            <div id="footerSock" class="librarySock">
+                <div id="footerSockInner">
+                        <a name="feedback"></a>
+
+<div class="rating">
+    <div id="ratingSection1">
+        <div class="title">
+            Была ли эта страница полезной?
+        </div>
+        <div class="description">
+            Ваш отзыв об этом контенте важен для нас.<br />Расскажите нам о том, что вы думаете.
+        </div>
+        <div class="buttons">
+            <button class="button" id="ratingYes">Да</button>
+            <button class="button" id="ratingNo">Нет</button>
+        </div>
+        <input id="ratingValue" type="hidden" value="" />
+    </div>
+    <div id="ratingSection2">
+        <div class="title">
+            Дополнительный отзыв?
+        </div>
+        <textarea id="ratingText" rows="6" cols="" maxlength="1500"></textarea>
+        <div class="counter right">
+            <span id="feedbackTextCounter">1500</span> символов осталось
+        </div>
+        <div class="buttons left">
+            <button class="button" id="ratingSubmit">Отправить</button>
+            <button class="button" id="ratingSkipThis">Пропустить</button>
+        </div>
+    </div>
+    <div id="ratingSection3">
+        <div class="title">
+            Спасибо!
+        </div>
+        <div class="description">
+            Благодарим за отзыв. Ваше мнение очень важно для нас.
+        </div>
+    </div>
+    
+    
+    <div id="contentFeedbackQAContainer" style="display: none;"></div>
+</div>
+    
+                                        <div class="clear"></div>
+                </div>
+            </div>
+
+        <footer class="top">
+            <div data-fragmentName="LeftLinks" id="Fragment_LeftLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Центры разработки</div>
+    <ul class="links">
+      <li>
+        <a href="http://dev.windows.com" id="LeftLinks_2148_1" class="windowsBlue" xmlns="http://www.w3.org/1999/xhtml">Windows</a>
+      </li>
+      <li>
+        <a href="http://dev.office.com" id="LeftLinks_2148_3" class="office" xmlns="http://www.w3.org/1999/xhtml">Office</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/vstudio" id="LeftLinks_2148_4" class="visualStudio" xmlns="http://www.w3.org/1999/xhtml">Visual Studio</a>
+      </li>
+      <li>
+        <a href="http://developer.nokia.com/" title="Nokia" id="LeftLinks_2148_15" class="nokia" xmlns="http://www.w3.org/1999/xhtml">Nokia</a>
+      </li>
+      <li>
+        <a href="http://azure.microsoft.com/ru-ru/documentation/" target="_blank" id="LeftLinks_2148_12" xmlns="http://www.w3.org/1999/xhtml">Microsoft Azure</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/aa937802" id="LeftLinks_2148_5" xmlns="http://www.w3.org/1999/xhtml">Дополнительно...</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <div id="rightLinks">
+                <div data-fragmentName="CenterLinks1" id="Fragment_CenterLinks1" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Обучение</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoftvirtualacademy.com/" id="CenterLinks1_2151_4" xmlns="http://www.w3.org/1999/xhtml">Microsoft Virtual Academy</a>
+      </li>
+      <li>
+        <a href="http://channel9.msdn.com/Browse/Series?lang=ru" id="CenterLinks1_2151_5" xmlns="http://www.w3.org/1999/xhtml">Канал Channel 9</a>
+      </li>
+      <li>
+        <a href="http://www.techdays.ru/" id="CenterLinks1_2151_6" xmlns="http://www.w3.org/1999/xhtml">TechDays</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/ru-ru/magazine/default.aspx" id="CenterLinks1_2151_7" xmlns="http://www.w3.org/1999/xhtml">Журнал MSDN</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentName="CenterLinks2" id="Fragment_CenterLinks2" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Сообщество</div>
+    <ul class="links">
+      <li>
+        <a href="http://blogs.msdn.com/b/rudevnews/" id="CenterLinks2_2151_17" xmlns="http://www.w3.org/1999/xhtml">Новости</a>
+      </li>
+      <li>
+        <a href="https://social.msdn.microsoft.com/forums/ru-ru/home" id="CenterLinks2_2151_8" xmlns="http://www.w3.org/1999/xhtml">Форумы</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/ru-ru/jj129558" id="CenterLinks2_2151_9" xmlns="http://www.w3.org/1999/xhtml">Блоги</a>
+      </li>
+      <li>
+        <a href="http://www.codeplex.com" id="CenterLinks2_2151_10" xmlns="http://www.w3.org/1999/xhtml">Codeplex</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentName="CenterLinks3" id="Fragment_CenterLinks3" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Свяжитесь с нами</div>
+    <ul class="links">
+      <li>
+        <a href="http://msdn.microsoft.com/hh361695" id="CenterLinks3_2151_11" xmlns="http://www.w3.org/1999/xhtml">Самостоятельно</a>
+      </li>
+    </ul>
+  </div>
+</div>
+                <div data-fragmentName="CenterLinks4" id="Fragment_CenterLinks4" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <div class="linkListTitle">Программы</div>
+    <ul class="links">
+      <li>
+        <a href="http://www.microsoft.com/ru/ru/ms-start/default.aspx" id="CenterLinks4_2151_13" xmlns="http://www.w3.org/1999/xhtml">BizSpark (для стартапов)</a>
+      </li>
+      <li>
+        <a href="https://www.dreamspark.com/" id="CenterLinks4_2151_14" xmlns="http://www.w3.org/1999/xhtml">DreamSpark (для студентов и вузов)</a>
+      </li>
+      <li>
+        <a href="http://www.imaginecup.com" id="CenterLinks4_2151_17" xmlns="http://www.w3.org/1999/xhtml">Imagine Cup</a>
+      </li>
+    </ul>
+  </div>
+</div>                
+            </div>
+        </footer>
+    
+        <footer class="bottom">
+            <span class="localeContainer">
+                
+    <form class="selectLocale" id="selectLocaleForm" action="http://msdn.microsoft.com/ru-ru/selectlocale-dmc">
+        <input type="hidden" name="fromPage" value="http%3a%2f%2fmsdn.microsoft.com%2fru-ru%2flibrary%2fms182532.aspx" />
+        <a href="#" onclick="$('#selectLocaleForm').submit();return false;" title="Измените язык">Россия (Pусский)</a>
+    </form>
+
+
+            </span>
+        
+            <div data-fragmentName="BottomLinks" id="Fragment_BottomLinks" xmlns="http://www.w3.org/1999/xhtml">
+  
+  <div class="linkList">
+    <ul class="links horizontal">
+      <li>
+        <a href="http://msdn.microsoft.com/newsletter.aspx" id="BottomLinks_2148_7" xmlns="http://www.w3.org/1999/xhtml">Информационный бюллетень</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/dn529288" id="BottomLinks_2148_8" xmlns="http://www.w3.org/1999/xhtml">Конфиденциальность и файлы cookie</a>
+      </li>
+      <li>
+        <a href="http://msdn.microsoft.com/cc300389" id="BottomLinks_2148_9" xmlns="http://www.w3.org/1999/xhtml">Условия использования</a>
+      </li>
+      <li>
+        <a href="http://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/EN-US.aspx" id="BottomLinks_2148_10" xmlns="http://www.w3.org/1999/xhtml">Товарные знаки</a>
+      </li>
+    </ul>
+  </div>
+</div>    
+            <span class="logoLegal">
+                <span class="logo"></span>
+                <span class="copyright">© 2014 Microsoft</span>
+            </span>
+        </footer>
+    </div>
+    
+
+
+            <div class="footerPrintView">
+                <div class="footerCopyrightPrintView">© 2014 Microsoft</div>
+            </div>
+
+            
+            
+    
+    
+    <input id="tocPaddingPerLevel" type="hidden" value="17" />
+
+
+
+            <input id="MtpsDevice" type="hidden" value="Default" />
+
+
+<![CDATA[ Third party scripts and code linked to or referenced from this website are licensed to you by the parties that own such code, not by Microsoft.  See ASP.NET Ajax CDN Terms of Use – http://www.asp.net/ajaxlibrary/CDN.ashx. ]]>
+
+            
+            
+            
+            
+            
+
+
+
+
+
+
+
+<noscript><div><img alt="DCSIMG" id="Img1" width="1" height="1" src="http://m.webtrends.com/dcsmgru7m99k7mqmgrhudo0k8_8c6m/njs.gif?dcsuri=/nojavascript&amp;WT.js=No" /></div></noscript>
+
+
+
+
+
+
+
+
+
+<noscript>
+  <a href="http://www.omniture.com" title="Web Analytics">
+    <img src="//msstonojsmsdn.112.2o7.net/b/ss/msstonojsmsdn/1/H.20.2--NS/0" height="1" width="1" border="0" alt="" />
+  </a>
+</noscript>
+
+
+
+
+<div id="globalRequestVerification">
+    <input name="__RequestVerificationToken" type="hidden" value="mioyVjAHcbhFMND0CfkMeiy4hjRAjiJc4E8jcqs6G7gWbp_z1L6QOmdIFNp4Nkx0Nx5u6ntyYZeoi2B1MjuVJjiTAGI1" />
+</div>
+
+
+        </div>
+
+        
+        
+        
+        
+    <script type="text/javascript" class="mtps-injected">
+/*<![CDATA[*/
+(function(window,document){"use strict";function preload(scripts){for(var result=[],script,e,i=0;i<scripts.length;i++)script=scripts[i],script.hasOwnProperty("url")&&(e=document.createElement("script"),e.src=script.url,script.throwaway=e),result.push(script);return result}function inject(scripts,index){var script,elem;if(index>=scripts.length){delete mtps.injectScripts;return}script=scripts[index];elem=document.createElement("script");elem.className="mtps-injected";elem.async=!1;var isLoaded=!1,timeoutId=0,injectNextFnName="",injectNext=elem.onerror=function(){isLoaded||(isLoaded=!0,inject(scripts,index+1),window.clearTimeout(timeoutId),elem.onload=elem.onerror=elem.onreadystatechange=null,injectNextFnName&&delete mtps[injectNextFnName],elem.removeEventListener&&elem.removeEventListener("load",injectNext,!1))};elem.addEventListener?elem.addEventListener("load",injectNext,!1):elem.readyState==="uninitialized"?elem.onreadystatechange=function(){(this.readyState==="loaded"||this.readyState==="complete")&&injectNext()}:elem.onload=injectNext;script.hasOwnProperty("url")?(timeoutId=window.setTimeout(injectNext,12e4),elem.src=script.url):(injectNextFnName="_injectNextScript_"+index,mtps[injectNextFnName]=injectNext,timeoutId=window.setTimeout(injectNext,2e3),elem.text="try {\n"+script.txt+"\n} finally { MTPS."+injectNextFnName+" && MTPS."+injectNextFnName+"(); }");parent.appendChild(elem)}var mtps=window.MTPS||(window.MTPS={}),parent=document.getElementsByTagName("head")[0];mtps.injectScripts=function(scripts){inject(preload(scripts),0)}})(window,document);
+MTPS.injectScripts([
+	{ txt: "/**/\r\n(window.MTPS || (window.MTPS = {})).cdnDomains || (window.MTPS.cdnDomains = { \r\n\t\"image\": \"http://i.msdn.microsoft.com\", \r\n\t\"js\": \"http://i2.msdn.microsoft.com\", \r\n\t\"css\": \"http://i3.msdn.microsoft.com\", \r\n\t\"xap\": \"http://207.46.99.222\"\r\n});\r\n/**/" },
+	{ url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" },
+	{ txt: "//\n  var literalNormalizedUrl = \u0027/ru-ru/library/ms182532(l=ru-ru,v=vs.120).aspx\u0027;\n  var wt_nvr_ru = \u0027WT_NVR_RU\u0027;\n  var wt_fpcdom = \u0027.microsoft.com\u0027;\n  var wt_domlist = \u0027msdn.microsoft.com\u0027;\n  var wt_pathlist = \u0027\u0027;\n  var wt_paramlist = \u0027DCSext.mtps_devcenter\u0027;\n  var wt_siteid = \u0027MSDN\u0027;\n  var gDomain = \u0027m.webtrends.com\u0027;\n  var gDcsId = \u0027dcsmgru7m99k7mqmgrhudo0k8_8c6m\u0027;\n  var gFpc = \u0027WT_FPC\u0027;\n\n\n\n  if (document.cookie.indexOf(gFpc + \"=\") == -1) {\n    var wtidJs = document.createElement(\"script\");\n    wtidJs.src = \"//\" + gDomain + \"/\" + gDcsId + \"/wtid.js\";\n    document.getElementsByTagName(\"head\")[0].appendChild(wtidJs);\n  }\n\n\n\n  var detectedLocale = \u0027ru-ru\u0027;\n  var wtsp = \u0027msdnlib_devtools_lang\u0027;\n  var gTrackEvents = \u00270\u0027;\n/**/" },
+	{ txt: "/**/\n  var omni_guid = \"6763d504-ad0a-44f4-8d34-06ce58dbd7c9\";\n/**/" },
+	{ txt: "//\n\n            window.appInsightsId = \u002760854590-027a-4ae4-98be-2741a40f355f\u0027;\n            //" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:Utilities,1:Layout,2:Header,3:FeedbackCounterAsync,1:Rating,2:Footer,0:Topic,4:webtrendsscript,5:omni_rsid_MSDN,0:AppInsightsPerf,6:Toc,1:SearchBox;/Areas/Epx/Content/Scripts:0,/Areas/Epx/Themes/Base/Content:1,/Areas/Centers/Themes/StandardDevCenter/Content:2,/Areas/Epx/Shared/Content:3,/Areas/Global/Content/Webtrends/resources:4,/Areas/Global/Content/Omniture/resources/MSDN:5,/Areas/Library/Content:6\u0026amp;hashKey=7BE5AEF5C4D1D2A8D51DDFA40FFA44AF" },
+	{ url: "http://i1.services.social.microsoft.com/search/Widgets/SearchBox.jss?boxid=HeaderSearchTextBox\u0026btnid=HeaderSearchButton\u0026brand=Msdn\u0026loc=ru-ru\u0026focusOnInit=false\u0026emptyWatermark=true\u0026searchButtonTooltip=Поиск в MSDN" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:PrintExportButton,1:NavigationResize;/Areas/Library/Themes/Base/Content:0,/Areas/Library/Content:1\u0026amp;hashKey=72684789A0F98A77C33C1AC3470E9ECF" },
+	{ txt: "//\n    MTPS = window.MTPS || {};\n    MTPS.Translation = window.MTPS.Translation || {};\n\n    MTPS.Translation.TranslationType =  0;\n    \n    \n        \n        MTPS.Translation.EditorLink = {\n            includeEditor : 0,\n            editLink: \"http://msdn.microsoft.com/ru-ru/library/translation/edit/ms182532.aspx\",\n            editLinkText: \"Предложите более удачный вариант перевода\"\n        };\n        \n    //" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:jquery.popup,0:Translator;/Areas/Library/Content:0\u0026amp;hashKey=3B656D983EF24EC5D2C54AB67215CFD7" },
+	{ txt: "MTPS = window.MTPS || {}; MTPS.LocalizedStrings = window.MTPS.LocalizedStrings || {}; MTPS.LocalizedStrings.ExpandButtonTooltip = \u0027Развернуть\u0027; MTPS.LocalizedStrings.CollapseButtonTooltip = \u0027Свернуть\u0027; MTPS.LocalizedStrings.EnhancedExpandTooltip = \u0027Щелкните, чтобы развернуть. Щелкните дважды, чтобы развернуть все.\u0027; MTPS.LocalizedStrings.EnhancedCollapseTooltip = \u0027Щелкните, чтобы свернуть. Щелкните дважды, чтобы свернуть все.\u0027; MTPS.LocalizedStrings.ExpandAllButtonTooltip = \u0027Развернуть все\u0027; MTPS.LocalizedStrings.CollapseAllButtonTooltip = \u0027Свернуть все\u0027;" },
+	{ url: "http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" },
+	{ url: "http://i2.msdn.microsoft.com/Combined.js?resources=0:CommunityContent,0:LibraryMemberFilter,1:Toc_Fixed,1:CodeSnippet,1:TopicNotInScope,1:CollapsibleArea,1:VersionSelector,1:SurveyBroker;/Areas/Library/Content:0,/Areas/Epx/Content/Scripts:1\u0026amp;hashKey=EB298C838117D9E7008C7CC11E7732E3" },
+	{ txt: "$(document).ready(function() {\n        try {\n            var token = $(\"#globalRequestVerification input[name=\u0027__RequestVerificationToken\u0027]\").clone();\n            $(\"#siteFeedbackForm\").append(token);\n        } catch(err) {\n            \n        }\n    });" }
+]);
+
+/*]]>*/
+</script></body>
+</html>
