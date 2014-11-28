@@ -47,7 +47,11 @@ namespace Student_Serialisation
         }
 
         public Student () { }
-
+        /// <summary>
+        /// Создает список студентов со случайными параметрами.
+        /// </summary>
+        /// <param name="listSize">Размер возвращаемого списка.</param>
+        /// <returns>Список объектов Students</returns>
         public static List<Student> GetStudentsList(int listSize)
         {
             Random rd = new Random();
