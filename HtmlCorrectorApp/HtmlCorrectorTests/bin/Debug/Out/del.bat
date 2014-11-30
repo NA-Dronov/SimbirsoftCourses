@@ -1,1 +1,0 @@
-DEL /F /S /Q /A *.html

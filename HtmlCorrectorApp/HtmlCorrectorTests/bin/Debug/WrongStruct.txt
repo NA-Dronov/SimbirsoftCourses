@@ -1,4 +1,0 @@
-wrong string
-good
-not,bad
-bad again
