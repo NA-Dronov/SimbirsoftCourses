@@ -1,0 +1,27 @@
+﻿USE [Storage]
+GO
+/****** Object:  Trigger [dbo].[BONUS_CALC]    Script Date: 16.12.2014 17:57:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER Trigger [dbo].[BONUS_CALC]
+ON [dbo].[SUPPLIES] 
+AFTER INSERT AS
+BEGIN
+ DECLARE @e_id int
+ DECLARE @c int
+ DECLARE s CURSOR FOR SELECT EMPLOYEE_ID, COUNT(*) AS c FROM [dbo].[SUPPLIES] GROUP BY EMPLOYEE_ID;
+ OPEN s
+ WHILE 1=1 BEGIN
+	FETCH FROM s INTO @e_id, @c
+	IF @@fetch_status=-1 
+      BREAK
+	IF @@fetch_status=-2
+      CONTINUE
+	IF @c % 2 = 0
+		UPDATE [dbo].EMPLOYEE SET BONUS = @c / 2 * 5000 WHERE ID = @e_id; 
+ END
+ DEALLOCATE s
+END;

@@ -1,0 +1,18 @@
+USE [Storage]
+GO
+/****** Object:  StoredProcedure [dbo].[create_invoice]    Script Date: 16.12.2014 17:58:41 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+ALTER PROCEDURE [dbo].[create_invoice] @work_date date, @employee int
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT [SUPPLIES].[ID], [SUPPLIES].[DATE], [SUPPLIES].[EMPLOYEE_ID], [VENDORS].[ID] AS VENDORS_ID, [VENDORS].[NAME], [VENDORS].[COUNTRY], [VENDORS].[LOCATION]
+		FROM [SUPPLIES] JOIN [GOODS] ON [SUPPLIES].[GOODS_ID] = [GOODS].[ID] JOIN [VENDORS] ON [GOODS].[VENDOR_ID]=[VENDORS].[ID]
+		
+		WHERE [SUPPLIES].[DATE] = @work_date AND [SUPPLIES].[EMPLOYEE_ID] = @employee
+END

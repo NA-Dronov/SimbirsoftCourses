@@ -1,0 +1,29 @@
+USE [Storage]
+GO
+/****** Object:  UserDefinedFunction [dbo].[RETURN_MONTH_EMPLOYEE]    Script Date: 16.12.2014 17:59:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+ALTER FUNCTION [dbo].[RETURN_MONTH_EMPLOYEE]
+(	
+	@month Date
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	SELECT a.EMPLOYEE_ID, e.NAME, ep.NAME AS POSITION 
+	FROM (
+		SELECT EMPLOYEE_ID, COUNT(*) AS c 
+		FROM [dbo].[SUPPLIES] 
+		WHERE MONTH(DATE) = MONTH(@month) AND YEAR(DATE) = YEAR(@month) 
+		GROUP BY EMPLOYEE_ID) AS a 
+	JOIN [dbo].[EMPLOYEE] AS e 
+		ON e.ID = a.EMPLOYEE_ID 
+	JOIN [dbo].[EMPLOYEE_POSITION] AS ep 
+		ON ep.ID = e.POSITION_ID 
+	ORDER BY a.c DESC 
+	OFFSET 0 ROWS FETCH NEXT 1 ROWS  ONLY
+)
